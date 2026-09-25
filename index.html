@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DSA Pattern Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F1218; --panel:#171B23; --panel2:#1D222C; --border:#282E3A;
+  --text:#E7E9EE; --dim:#8A93A6; --dim2:#5E6678;
+  --accent:#7DD3FC; --accent-dim:#3A5A70;
+  --easy:#34D399; --med:#FBBF24; --hard:#FB7185;
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#F7F7F5; --panel:#FFFFFF; --panel2:#F0F0EE; --border:#E2E1DC;
+    --text:#1B1D22; --dim:#6B7280; --dim2:#9CA3AF;
+    --accent-dim:#CFE9F7;
+  }
+}
+:root[data-theme="dark"]{ --bg:#0F1218; }
+*{box-sizing:border-box;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+body{
+  margin:0; background:var(--bg); color:var(--text); font-family:var(--font-sans);
+  -webkit-font-smoothing:antialiased; min-height:100%;
+}
+.wrap{max-width:760px; margin:0 auto; padding:0 20px 80px;}
+
+/* header */
+header{
+  position:sticky; top:0; z-index:10;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:env(safe-area-inset-top,0px) 0 0;
+}
+.hd-inner{max-width:760px; margin:0 auto; padding:18px 20px 14px;}
+.hd-top{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+h1{font-size:19px; font-weight:700; margin:0; letter-spacing:-0.01em;}
+.hd-count{font-family:var(--font-mono); font-size:13px; color:var(--dim); white-space:nowrap;}
+.hd-count b{color:var(--accent); font-weight:600;}
+
+.bar{height:6px; border-radius:99px; background:var(--panel2); overflow:hidden; margin-top:10px;}
+.bar-fill{height:100%; background:linear-gradient(90deg,var(--accent),#a8e6fc); width:0%; transition:width .4s ease;}
+
+.controls{display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; align-items:center;}
+.search{
+  flex:1; min-width:140px; background:var(--panel); border:1px solid var(--border);
+  color:var(--text); border-radius:8px; padding:8px 12px; font-size:13px; font-family:var(--font-sans);
+}
+.search:focus{outline:2px solid var(--accent); outline-offset:-1px;}
+.chip{
+  background:var(--panel); border:1px solid var(--border); color:var(--dim);
+  font-size:12px; font-family:var(--font-mono); padding:7px 11px; border-radius:8px; cursor:pointer;
+  user-select:none;
+}
+.chip[data-active="1"]{color:var(--bg); background:var(--accent); border-color:var(--accent); font-weight:600;}
+.chip:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+/* nav */
+.nav{display:flex; gap:6px; margin-top:12px; overflow-x:auto;}
+.nav a{
+  font-size:12px; color:var(--dim); text-decoration:none; padding:6px 10px;
+  border:1px solid var(--border); border-radius:99px; white-space:nowrap; font-family:var(--font-mono);
+}
+.nav a:hover{color:var(--text); border-color:var(--dim2);}
+
+/* pattern section */
+.pattern{margin-top:34px;}
+.p-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+.p-title{font-size:16px; font-weight:700; margin:0; scroll-margin-top:150px;}
+.p-sub{font-family:var(--font-mono); font-size:12px; color:var(--dim);}
+.p-bar{margin-top:8px;}
+.p-actions{display:flex; gap:6px; margin-top:10px;}
+.linklike{
+  background:none; border:none; color:var(--dim); font-size:12px; font-family:var(--font-mono);
+  cursor:pointer; padding:4px 0; text-decoration:underline; text-underline-offset:2px;
+}
+.linklike:hover{color:var(--accent);}
+
+/* phase */
+.phase{margin-top:14px; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:var(--panel);}
+.phase-hd{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:12px 14px; cursor:pointer; user-select:none;
+}
+.phase-hd:hover{background:var(--panel2);}
+.phase-hd-left{display:flex; align-items:center; gap:10px; min-width:0;}
+.chevron{color:var(--dim2); font-size:11px; transition:transform .2s ease; flex:none;}
+.phase[data-open="1"] .chevron{transform:rotate(90deg);}
+.phase-name{font-weight:600; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.phase-meta{display:flex; align-items:center; gap:8px; flex:none;}
+.phase-count{font-family:var(--font-mono); font-size:11px; color:var(--dim2);}
+.mini-bar{width:46px; height:4px; border-radius:99px; background:var(--panel2); overflow:hidden;}
+.mini-fill{height:100%; background:var(--accent);}
+
+.rows{display:none; border-top:1px solid var(--border);}
+.phase[data-open="1"] .rows{display:block;}
+
+.row{
+  display:flex; align-items:flex-start; gap:10px; padding:10px 14px;
+  border-top:1px solid var(--border);
+}
+.row:first-child{border-top:none;}
+.row[data-hidden="1"]{display:none;}
+.row.done .row-title{color:var(--dim); text-decoration:line-through; text-decoration-color:var(--dim2);}
+
+.cb{
+  appearance:none; width:17px; height:17px; border-radius:5px; border:1.5px solid var(--dim2);
+  background:transparent; flex:none; margin-top:2px; cursor:pointer; position:relative;
+}
+.cb:checked{background:var(--accent); border-color:var(--accent);}
+.cb:checked::after{
+  content:""; position:absolute; left:5px; top:1px; width:4px; height:8px;
+  border:solid var(--bg); border-width:0 2px 2px 0; transform:rotate(45deg);
+}
+.cb:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+.row-body{flex:1; min-width:0;}
+.row-line{display:flex; align-items:baseline; gap:7px; flex-wrap:wrap;}
+.dot{width:8px; height:8px; border-radius:50%; flex:none;}
+.dot.E{background:var(--easy);} .dot.M{background:var(--med);} .dot.H{background:var(--hard);}
+.row-num{font-family:var(--font-mono); font-size:12px; color:var(--dim);}
+.row-title{font-size:14px; font-weight:500;}
+.row-title a{color:inherit; text-decoration:none;}
+.row-title a:hover{color:var(--accent);}
+.row-meta{display:flex; align-items:center; gap:6px; margin-top:4px; flex-wrap:wrap;}
+.tag{
+  font-size:10.5px; font-family:var(--font-mono); color:var(--dim); background:var(--panel2);
+  border:1px solid var(--border); padding:2px 7px; border-radius:99px;
+}
+.stars{color:var(--med); font-size:11px; letter-spacing:1px;}
+.repeat{
+  font-size:10.5px; color:var(--dim); display:inline-flex; align-items:center; gap:3px;
+}
+
+footer{max-width:760px; margin:40px auto 0; padding:0 20px; text-align:center; color:var(--dim2); font-size:12px; font-family:var(--font-mono);}
+
+::-webkit-scrollbar{height:6px; width:6px;}
+::-webkit-scrollbar-thumb{background:var(--border); border-radius:99px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-inner">
+    <div class="hd-top">
+      <h1>DSA Pattern Tracker</h1>
+      <div class="hd-count"><b id="doneCount">0</b> / <span id="totalCount">0</span> solved</div>
+    </div>
+    <div class="bar"><div class="bar-fill" id="overallBar"></div></div>
+    <div class="controls">
+      <input class="search" id="search" type="text" placeholder="Search by name or number…" aria-label="Search problems">
+      <button class="chip" data-diff="all" data-active="1">All</button>
+      <button class="chip" data-diff="E">Easy</button>
+      <button class="chip" data-diff="M">Medium</button>
+      <button class="chip" data-diff="H">Hard</button>
+    </div>
+    <nav class="nav" id="navLinks"></nav>
+  </div>
+</header>
+
+<div class="wrap" id="app"></div>
+
+<footer>Progress is saved locally in this browser · <span id="repeatNote">🔁 = repeated problem, appears in an earlier phase too</span></footer>
+
+<script id="lc-data" type="application/json">[{"id":"two-pointers","title":"Two Pointers & Sliding Window","phases":[{"title":"Fundamentals","rows":[{"n":344,"t":"Reverse String","s":"reverse-string","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":125,"t":"Valid Palindrome","s":"valid-palindrome","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":167,"t":"Two Sum II - Input Array Is Sorted","s":"two-sum-ii-input-array-is-sorted","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":283,"t":"Move Zeroes","s":"move-zeroes","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":26,"t":"Remove Duplicates from Sorted Array","s":"remove-duplicates-from-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":27,"t":"Remove Element","s":"remove-element","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":977,"t":"Squares of a Sorted Array","s":"squares-of-a-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":88,"t":"Merge Sorted Array","s":"merge-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Opposite Pointers","rows":[{"n":11,"t":"Container With Most Water","s":"container-with-most-water","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":15,"t":"3Sum","s":"3sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":16,"t":"3Sum Closest","s":"3sum-closest","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":18,"t":"4Sum","s":"4sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":259,"t":"3Sum Smaller","s":"3sum-smaller","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":611,"t":"Valid Triangle Number","s":"valid-triangle-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":881,"t":"Boats to Save People","s":"boats-to-save-people","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Fast & Slow Pointers","rows":[{"n":141,"t":"Linked List Cycle","s":"linked-list-cycle","d":"E","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":142,"t":"Linked List Cycle II","s":"linked-list-cycle-ii","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":876,"t":"Middle of the Linked List","s":"middle-of-the-linked-list","d":"E","st":0,"tg":["Linked List","Two Pointers"],"r":false},{"n":202,"t":"Happy Number","s":"happy-number","d":"E","st":0,"tg":["Hash Table","Math"],"r":false},{"n":287,"t":"Find the Duplicate Number","s":"find-the-duplicate-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":457,"t":"Circular Array Loop","s":"circular-array-loop","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"Fixed Sliding Window","rows":[{"n":643,"t":"Maximum Average Subarray I","s":"maximum-average-subarray-i","d":"E","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1343,"t":"Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold","s":"number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1456,"t":"Maximum Number of Vowels in a Substring of Given Length","s":"maximum-number-of-vowels-in-a-substring-of-given-length","d":"M","st":0,"tg":["String","Sliding Window"],"r":false},{"n":1052,"t":"Grumpy Bookstore Owner","s":"grumpy-bookstore-owner","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":567,"t":"Permutation in String","s":"permutation-in-string","d":"M","st":1,"tg":["Hash Table","Two Pointers"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":1,"tg":["Hash Table","String"],"r":false}]},{"title":"Variable Sliding Window","rows":[{"n":28,"t":"Find the Index of the First Occurrence in a String","s":"find-the-index-of-the-first-occurrence-in-a-string","d":"E","st":3,"tg":["Two Pointers","String"],"r":false},{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1004,"t":"Max Consecutive Ones III","s":"max-consecutive-ones-iii","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1493,"t":"Longest Subarray of 1's After Deleting One Element","s":"longest-subarray-of-1s-after-deleting-one-element","d":"M","st":0,"tg":["Array","Dynamic Programming"],"r":false},{"n":713,"t":"Subarray Product Less Than K","s":"subarray-product-less-than-k","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":904,"t":"Fruit Into Baskets","s":"fruit-into-baskets","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1695,"t":"Maximum Erasure Value","s":"maximum-erasure-value","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1208,"t":"Get Equal Substrings Within Budget","s":"get-equal-substrings-within-budget","d":"M","st":0,"tg":["String","Binary Search"],"r":false}]},{"title":"Frequency Window","rows":[{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":424,"t":"Longest Repeating Character Replacement","s":"longest-repeating-character-replacement","d":"M","st":4,"tg":["Hash Table","String"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"At Most K","rows":[{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"Monotonic Deque","rows":[{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":5,"tg":["Array","Queue"],"r":false},{"n":1438,"t":"Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit","s":"longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit","d":"M","st":5,"tg":["Array","Queue"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":1499,"t":"Max Value of Equation","s":"max-value-of-equation","d":"H","st":0,"tg":["Array","Queue"],"r":false},{"n":1425,"t":"Constrained Subsequence Sum","s":"constrained-subsequence-sum","d":"H","st":0,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Capstone Review","rows":[{"n":42,"t":"Trapping Rain Water","s":"trapping-rain-water","d":"H","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":1498,"t":"Number of Subsequences That Satisfy the Given Sum Condition","s":"number-of-subsequences-that-satisfy-the-given-sum-condition","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":0,"tg":["Array","Queue"],"r":true}]}]},{"id":"prefix-sum","title":"Prefix Sum","phases":[{"title":"Foundation","rows":[{"n":1480,"t":"Running Sum of 1d Array","s":"running-sum-of-1d-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":303,"t":"Range Sum Query - Immutable","s":"range-sum-query-immutable","d":"E","st":0,"tg":["Array","Design"],"r":false},{"n":724,"t":"Find Pivot Index","s":"find-pivot-index","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1991,"t":"Find the Middle Index in Array","s":"find-the-middle-index-in-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":2574,"t":"Left and Right Sum Differences","s":"left-and-right-sum-differences","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1588,"t":"Sum of All Odd Length Subarrays","s":"sum-of-all-odd-length-subarrays","d":"E","st":0,"tg":["Array","Math"],"r":false},{"n":1732,"t":"Find the Highest Altitude","s":"find-the-highest-altitude","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false}]},{"title":"+ Hashmap","rows":[{"n":560,"t":"Subarray Sum Equals K","s":"subarray-sum-equals-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Modulo","rows":[{"n":523,"t":"Continuous Subarray Sum","s":"continuous-subarray-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":2845,"t":"Count of Interesting Subarrays","s":"count-of-interesting-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Transformation","rows":[{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1546,"t":"Maximum Number of Non-Overlapping Subarrays With Sum Equals Target","s":"maximum-number-of-non-overlapping-subarrays-with-sum-equals-target","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"2D Prefix Sum","rows":[{"n":1314,"t":"Matrix Block Sum","s":"matrix-block-sum","d":"M","st":0,"tg":["Array","Matrix"],"r":false},{"n":304,"t":"Range Sum Query 2D - Immutable","s":"range-sum-query-2d-immutable","d":"M","st":0,"tg":["Array","Design"],"r":false},{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1292,"t":"Maximum Side Length of a Square with Sum Less than or Equal to Threshold","s":"maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false}]},{"title":"+ Binary Search","rows":[{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":2389,"t":"Longest Subsequence With Limited Sum","s":"longest-subsequence-with-limited-sum","d":"E","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1170,"t":"Compare Strings by Frequency of the Smallest Character","s":"compare-strings-by-frequency-of-the-smallest-character","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":528,"t":"Random Pick with Weight","s":"random-pick-with-weight","d":"M","st":0,"tg":["Array","Math"],"r":false}]},{"title":"+ Monotonic Deque","rows":[{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ OrderedSet / Tree","rows":[{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ Hashmap + 2D","rows":[{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":true}]},{"title":"+ Difference Array","rows":[{"n":1109,"t":"Corporate Flight Bookings","s":"corporate-flight-bookings","d":"M","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":2536,"t":"Increment Submatrices by One","s":"increment-submatrices-by-one","d":"M","st":0,"tg":["Array","Matrix"],"r":false}]},{"title":"Capstone Review","rows":[{"n":327,"t":"Count of Range Sum","s":"count-of-range-sum","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":493,"t":"Reverse Pairs","s":"reverse-pairs","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":315,"t":"Count of Smaller Numbers After Self","s":"count-of-smaller-numbers-after-self","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1542,"t":"Find Longest Awesome Substring","s":"find-longest-awesome-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":false},{"n":1915,"t":"Number of Wonderful Substrings","s":"number-of-wonderful-substrings","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":1524,"t":"Number of Sub-arrays With Odd Sum","s":"number-of-sub-arrays-with-odd-sum","d":"M","st":0,"tg":["Array","Math"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1171,"t":"Remove Zero Sum Consecutive Nodes from Linked List","s":"remove-zero-sum-consecutive-nodes-from-linked-list","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":2483,"t":"Minimum Penalty for a Shop","s":"minimum-penalty-for-a-shop","d":"M","st":0,"tg":["String","Prefix Sum"],"r":false},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":true}]}]},{"id":"merge-intervals","title":"Merge Intervals","phases":[{"title":"Fundamentals","rows":[{"n":228,"t":"Summary Ranges","s":"summary-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":163,"t":"Missing Ranges","s":"missing-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":56,"t":"Merge Intervals","s":"merge-intervals","d":"M","st":1,"tg":["Array","Sorting"],"r":false},{"n":57,"t":"Insert Interval","s":"insert-interval","d":"M","st":1,"tg":["Array"],"r":false}]},{"title":"Overlap & Greedy","rows":[{"n":252,"t":"Meeting Rooms","s":"meeting-rooms","d":"E","st":0,"tg":["Array","Sorting"],"r":false},{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":4,"tg":["Array","Two Pointers"],"r":false},{"n":435,"t":"Non-overlapping Intervals","s":"non-overlapping-intervals","d":"M","st":3,"tg":["Array","Dynamic Programming"],"r":false},{"n":452,"t":"Minimum Number of Arrows to Burst Balloons","s":"minimum-number-of-arrows-to-burst-balloons","d":"M","st":3,"tg":["Array","Greedy"],"r":false},{"n":1288,"t":"Remove Covered Intervals","s":"remove-covered-intervals","d":"M","st":0,"tg":["Array","Sorting"],"r":false}]},{"title":"Interval Relationships","rows":[{"n":986,"t":"Interval List Intersections","s":"interval-list-intersections","d":"M","st":3,"tg":["Array","Two Pointers"],"r":false},{"n":763,"t":"Partition Labels","s":"partition-labels","d":"M","st":0,"tg":["Hash Table","Two Pointers"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":false}]},{"title":"Scheduling","rows":[{"n":1942,"t":"The Number of the Smallest Unoccupied Chair","s":"the-number-of-the-smallest-unoccupied-chair","d":"M","st":4,"tg":["Array","Hash Table"],"r":false},{"n":2402,"t":"Meeting Rooms III","s":"meeting-rooms-iii","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":4,"tg":["Array","Sweep Line"],"r":false}]},{"title":"Sweep Line","rows":[{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":731,"t":"My Calendar II","s":"my-calendar-ii","d":"M","st":4,"tg":["Array","Binary Search"],"r":false},{"n":732,"t":"My Calendar III","s":"my-calendar-iii","d":"H","st":5,"tg":["Binary Search","Design"],"r":false}]},{"title":"Interval + Heap","rows":[{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":0,"tg":["Array","Two Pointers"],"r":true},{"n":1851,"t":"Minimum Interval to Include Each Query","s":"minimum-interval-to-include-each-query","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":0,"tg":["Array","Sweep Line"],"r":true}]},{"title":"Interval Coverage","rows":[{"n":1024,"t":"Video Stitching","s":"video-stitching","d":"M","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1326,"t":"Minimum Number of Taps to Open to Water a Garden","s":"minimum-number-of-taps-to-open-to-water-a-garden","d":"H","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":true},{"n":715,"t":"Range Module","s":"range-module","d":"H","st":5,"tg":["Design","Segment Tree"],"r":false}]},{"title":"Capstone Review","rows":[{"n":218,"t":"The Skyline Problem","s":"the-skyline-problem","d":"H","st":0,"tg":["Array","Divide and Conquer"],"r":false},{"n":391,"t":"Perfect Rectangle","s":"perfect-rectangle","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":850,"t":"Rectangle Area II","s":"rectangle-area-ii","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false},{"n":699,"t":"Falling Squares","s":"falling-squares","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false}]}]}]</script>
+<script>
+(function(){
+  const DATA = JSON.parse(document.getElementById('lc-data').textContent);
+  const STORE_KEY = 'lc_tracker_solved_v1';
+  let solved = new Set();
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) solved = new Set(JSON.parse(raw));
+  }catch(e){}
+
+  function persist(){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify([...solved])); }catch(e){}
+  }
+
+  const app = document.getElementById('app');
+  const nav = document.getElementById('navLinks');
+  let activeDiff = 'all';
+  let searchTerm = '';
+
+  const allNums = new Set();
+  DATA.forEach(p => p.phases.forEach(ph => ph.rows.forEach(r => allNums.add(r.n))));
+  document.getElementById('totalCount').textContent = allNums.size;
+
+  function diffLabel(d){ return d==='E' ? 'Easy' : d==='M' ? 'Medium' : 'Hard'; }
+
+  function build(){
+    app.innerHTML = '';
+    nav.innerHTML = '';
+    DATA.forEach(pattern => {
+      const navA = document.createElement('a');
+      navA.href = '#' + pattern.id;
+      navA.textContent = pattern.title;
+      nav.appendChild(navA);
+
+      const section = document.createElement('section');
+      section.className = 'pattern';
+      section.id = pattern.id;
+
+      const rowCount = pattern.phases.reduce((a,ph)=>a+ph.rows.length,0);
+      section.innerHTML = `
+        <div class="p-head">
+          <h2 class="p-title">${pattern.title}</h2>
+          <span class="p-sub">${rowCount} problems</span>
+        </div>
+        <div class="bar p-bar"><div class="bar-fill" data-pattern-bar="${pattern.id}"></div></div>
+        <div class="p-actions">
+          <button class="linklike" data-expand="${pattern.id}">expand all</button>
+          <button class="linklike" data-collapse="${pattern.id}">collapse all</button>
+        </div>
+      `;
+
+      pattern.phases.forEach((phase, idx) => {
+        const phaseEl = document.createElement('div');
+        phaseEl.className = 'phase';
+        phaseEl.dataset.open = '0';
+        phaseEl.dataset.pattern = pattern.id;
+
+        const rowsHtml = phase.rows.map(r => rowHtml(r)).join('');
+
+        phaseEl.innerHTML = `
+          <div class="phase-hd" role="button" tabindex="0" aria-expanded="false">
+            <div class="phase-hd-left">
+              <span class="chevron">▶</span>
+              <span class="phase-name">${phase.title}</span>
+            </div>
+            <div class="phase-meta">
+              <span class="phase-count" data-phase-count>0/${phase.rows.length}</span>
+              <div class="mini-bar"><div class="mini-fill" data-phase-bar></div></div>
+            </div>
+          </div>
+          <div class="rows">${rowsHtml}</div>
+        `;
+
+        const hd = phaseEl.querySelector('.phase-hd');
+        hd.addEventListener('click', () => toggle(phaseEl));
+        hd.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(phaseEl); }});
+
+        section.appendChild(phaseEl);
+      });
+
+      app.appendChild(section);
+
+      section.querySelector(`[data-expand="${pattern.id}"]`).addEventListener('click', () => {
+        section.querySelectorAll('.phase').forEach(p => { p.dataset.open='1'; p.querySelector('.phase-hd').setAttribute('aria-expanded','true'); });
+      });
+      section.querySelector(`[data-collapse="${pattern.id}"]`).addEventListener('click', () => {
+        section.querySelectorAll('.phase').forEach(p => { p.dataset.open='0'; p.querySelector('.phase-hd').setAttribute('aria-expanded','false'); });
+      });
+    });
+
+    app.querySelectorAll('.cb').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const n = parseInt(cb.dataset.num, 10);
+        if(cb.checked) solved.add(n); else solved.delete(n);
+        persist();
+        refreshRowsFor(n);
+        updateAllProgress();
+      });
+    });
+
+    updateAllProgress();
+    applyFilters();
+  }
+
+  function rowHtml(r){
+    const isDone = solved.has(r.n);
+    const stars = r.st ? `<span class="stars" title="${r.st}/5 priority">${'★'.repeat(r.st)}</span>` : '';
+    const repeat = r.r ? `<span class="repeat" title="Also appears in an earlier phase">🔁</span>` : '';
+    const tags = (r.tg||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+    return `
+      <div class="row ${isDone?'done':''}" data-num="${r.n}" data-diff="${r.d}" data-title="${r.t.toLowerCase()}">
+        <input type="checkbox" class="cb" data-num="${r.n}" ${isDone?'checked':''} aria-label="Mark ${r.t} solved">
+        <div class="row-body">
+          <div class="row-line">
+            <span class="dot ${r.d}"></span>
+            <span class="row-num">#${r.n}</span>
+            <span class="row-title"><a href="https://leetcode.com/problems/${r.s}/" target="_blank" rel="noopener">${r.t}</a></span>
+          </div>
+          <div class="row-meta">${tags}${stars}${repeat}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function toggle(phaseEl){
+    const open = phaseEl.dataset.open === '1';
+    phaseEl.dataset.open = open ? '0' : '1';
+    phaseEl.querySelector('.phase-hd').setAttribute('aria-expanded', String(!open));
+  }
+
+  function refreshRowsFor(num){
+    document.querySelectorAll(`.row[data-num="${num}"]`).forEach(row => {
+      const cb = row.querySelector('.cb');
+      const isDone = solved.has(num);
+      cb.checked = isDone;
+      row.classList.toggle('done', isDone);
+    });
+  }
+
+  function updateAllProgress(){
+    let doneUnique = 0;
+    allNums.forEach(n => { if(solved.has(n)) doneUnique++; });
+    document.getElementById('doneCount').textContent = doneUnique;
+    document.getElementById('overallBar').style.width = (allNums.size? (doneUnique/allNums.size*100):0) + '%';
+
+    DATA.forEach(pattern => {
+      const nums = new Set();
+      pattern.phases.forEach(ph => ph.rows.forEach(r => nums.add(r.n)));
+      let d = 0; nums.forEach(n => { if(solved.has(n)) d++; });
+      const bar = document.querySelector(`[data-pattern-bar="${pattern.id}"]`);
+      if(bar) bar.style.width = (nums.size? (d/nums.size*100):0) + '%';
+
+      document.querySelectorAll(`.phase[data-pattern="${pattern.id}"]`).forEach((phaseEl, idx) => {
+        const phase = pattern.phases[idx];
+        let pd = 0;
+        phase.rows.forEach(r => { if(solved.has(r.n)) pd++; });
+        phaseEl.querySelector('[data-phase-count]').textContent = `${pd}/${phase.rows.length}`;
+        phaseEl.querySelector('[data-phase-bar]').style.width = (phase.rows.length? (pd/phase.rows.length*100):0) + '%';
+      });
+    });
+  }
+
+  function applyFilters(){
+    document.querySelectorAll('.row').forEach(row => {
+      const d = row.dataset.diff;
+      const title = row.dataset.title;
+      const num = row.dataset.num;
+      const diffOk = activeDiff==='all' || d===activeDiff;
+      const searchOk = !searchTerm || title.includes(searchTerm) || num.includes(searchTerm);
+      const hidden = !(diffOk && searchOk);
+      row.dataset.hidden = hidden ? '1' : '0';
+    });
+    // auto-open phases that contain a visible match when searching
+    if(searchTerm){
+      document.querySelectorAll('.phase').forEach(ph => {
+        const hasVisible = [...ph.querySelectorAll('.row')].some(r => r.dataset.hidden==='0');
+        if(hasVisible){ ph.dataset.open='1'; }
+      });
+    }
+  }
+
+  document.getElementById('search').addEventListener('input', e => {
+    searchTerm = e.target.value.trim().toLowerCase();
+    applyFilters();
+  });
+  document.querySelectorAll('.chip[data-diff]').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip[data-diff]').forEach(c => c.dataset.active='0');
+      chip.dataset.active='1';
+      activeDiff = chip.dataset.diff;
+      applyFilters();
+    });
+  });
+
+  build();
+})();
+</script>
+</body>
+</html>
