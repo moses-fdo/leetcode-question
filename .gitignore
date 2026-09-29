@@ -1,0 +1,12 @@
+# Ignore everything by default
+*
+.*
+
+# Allow git configuration files
+!.gitignore
+!.gitattributes
+
+# Allow HTML files and README
+!*.html
+!README.md
+!readme.md
