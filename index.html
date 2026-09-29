@@ -190,31 +190,598 @@ body {
     display: block;
   }
 }
+
+/* Sidebar styling */
+.sidebar-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-icon {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+}
+.brand-text {
+  flex: 1;
+  min-width: 0;
+}
+.brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.brand-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.theme-toggle {
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+.theme-toggle:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.sidebar-stats {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.stat-main {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.stat-metric {
+  display: flex;
+  flex-direction: column;
+}
+.stat-number {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.stat-number small {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.stat-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.stat-percent {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.progress-bar-bg {
+  height: 7px;
+  background: var(--surface-hover);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #38BDF8);
+  width: 0%;
+  border-radius: var(--radius-full);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+}
+.stat-pill {
+  padding: 7px 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: var(--surface-hover);
+  text-align: center;
+}
+.pill-name {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.pill-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+.pill-easy .pill-name { color: var(--easy); }
+.pill-med .pill-name { color: var(--med); }
+.pill-hard .pill-name { color: var(--hard); }
+
+.sidebar-section {
+  padding: 16px 20px 10px;
+}
+.section-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.status-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.status-chip {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  text-align: left;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.15s ease;
+}
+.status-chip:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+.status-chip.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.nav-section {
+  flex: 1;
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  padding-bottom: 20px;
+}
+.pattern-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.nav-pattern-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-pattern-link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease;
+}
+.nav-pattern-link:hover {
+  background: var(--surface-hover);
+  color: var(--accent);
+}
+.nav-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  background: var(--surface-hover);
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+}
+.nav-phases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 10px;
+  margin-left: 6px;
+  border-left: 1px solid var(--border);
+}
+.nav-phase-link {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.12s ease;
+}
+.nav-phase-link:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.sidebar-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  margin-top: auto;
+}
+.footer-actions {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.tool-btn {
+  flex: 1;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+.tool-btn:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+.btn-danger:hover {
+  background: var(--hard-bg);
+  color: var(--hard);
+  border-color: var(--hard-border);
+}
+.footer-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+/* Main workspace styling */
+.workspace-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
+}
+.header-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.search-container {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+}
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  padding: 9px 38px 9px 36px;
+  font-size: 13.5px;
+  font-family: var(--font-sans);
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.search-kbd {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.diff-chips {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 3px;
+  border-radius: var(--radius-md);
+}
+.chip {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.chip:hover {
+  color: var(--text-primary);
+}
+.chip.active {
+  background: var(--accent);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+.view-toggles {
+  display: flex;
+  gap: 6px;
+}
+.action-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.action-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.curriculum-container {
+  max-width: 1040px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 28px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.empty-state {
+  max-width: 480px;
+  margin: 60px auto;
+  text-align: center;
+  padding: 32px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.empty-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+.empty-state h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.empty-state p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* Mobile topbar specifics */
+.mobile-menu-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  cursor: pointer;
+}
+.mobile-brand {
+  font-weight: 700;
+  font-size: 15px;
+}
+.mobile-solved {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="hd-inner">
-    <div class="hd-top">
-      <h1>DSA Pattern Tracker</h1>
-      <div class="hd-count"><b id="doneCount">0</b> / <span id="totalCount">0</span> solved</div>
-    </div>
-    <div class="bar"><div class="bar-fill" id="overallBar"></div></div>
-    <div class="controls">
-      <input class="search" id="search" type="text" placeholder="Search by name or number…" aria-label="Search problems">
-      <button class="chip" data-diff="all" data-active="1">All</button>
-      <button class="chip" data-diff="E">Easy</button>
-      <button class="chip" data-diff="M">Medium</button>
-      <button class="chip" data-diff="H">Hard</button>
-    </div>
-    <nav class="nav" id="navLinks"></nav>
-  </div>
-</header>
+<a href="#main-content" class="skip-link">Skip to problem list</a>
 
-<div class="wrap" id="app"></div>
+<div class="mobile-topbar">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu" aria-controls="app-sidebar" aria-expanded="false">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <div class="mobile-brand">DSA Pattern Tracker</div>
+  <div class="mobile-solved" id="mobileSolvedBadge">0/110</div>
+</div>
 
-<footer>Progress is saved locally in this browser · <span id="repeatNote">🔁 = repeated problem, appears in an earlier phase too</span></footer>
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="app-shell">
+  <aside class="app-sidebar" id="app-sidebar" aria-label="Navigation and statistics">
+    <div class="sidebar-header">
+      <div class="brand-row">
+        <span class="brand-icon">🧩</span>
+        <div class="brand-text">
+          <h1 class="brand-title">DSA Tracker</h1>
+          <span class="brand-sub">Pattern Roadmap</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon" id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="sidebar-stats" id="statWidgets">
+      <div class="stat-main">
+        <div class="stat-metric">
+          <span class="stat-number"><span id="doneCount">0</span><small>/<span id="totalCount">110</span></small></span>
+          <span class="stat-label">Problems Solved</span>
+        </div>
+        <div class="stat-percent" id="percentLabel">0%</div>
+      </div>
+      <div class="progress-bar-bg" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="mainProgressBarAria">
+        <div class="progress-bar-fill" id="overallBar"></div>
+      </div>
+      <div class="stat-pills">
+        <div class="stat-pill pill-easy">
+          <span class="pill-name">Easy</span>
+          <span class="pill-count" id="easyCount">0/23</span>
+        </div>
+        <div class="stat-pill pill-med">
+          <span class="pill-name">Med</span>
+          <span class="pill-count" id="medCount">0/62</span>
+        </div>
+        <div class="stat-pill pill-hard">
+          <span class="pill-name">Hard</span>
+          <span class="pill-count" id="hardCount">0/25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-title">STATUS FILTER</div>
+      <div class="status-options">
+        <button class="status-chip active" data-status="all">All Problems</button>
+        <button class="status-chip" data-status="solved">Solved Only</button>
+        <button class="status-chip" data-status="unsolved">Unsolved Only</button>
+        <button class="status-chip" data-status="starred">★ High Priority</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section nav-section">
+      <div class="section-title">PATTERNS & PHASES</div>
+      <nav class="pattern-nav" id="patternNav" aria-label="Patterns and phases"></nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="footer-actions">
+        <button class="tool-btn" id="exportBtn" title="Export progress as JSON">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export
+        </button>
+        <label class="tool-btn" id="importLabel" title="Import progress from JSON">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          Import
+          <input type="file" id="importInput" accept=".json" style="display:none">
+        </label>
+        <button class="tool-btn btn-danger" id="resetBtn" title="Reset all progress">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Reset
+        </button>
+      </div>
+      <div class="footer-note">Auto-saved locally in browser</div>
+    </div>
+  </aside>
+
+  <main class="main-workspace" id="main-content">
+    <header class="workspace-header">
+      <div class="header-inner">
+        <div class="search-container">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input class="search-input" id="search" type="search" placeholder="Search by problem name, #ID, or topic tag..." aria-label="Search problems">
+          <kbd class="search-kbd" title="Press / to search">/</kbd>
+        </div>
+        <div class="filter-controls">
+          <div class="diff-chips" role="radiogroup" aria-label="Difficulty filter">
+            <button class="chip active" data-diff="all" role="radio" aria-checked="true">All</button>
+            <button class="chip chip-e" data-diff="E" role="radio" aria-checked="false">Easy</button>
+            <button class="chip chip-m" data-diff="M" role="radio" aria-checked="false">Medium</button>
+            <button class="chip chip-h" data-diff="H" role="radio" aria-checked="false">Hard</button>
+          </div>
+          <div class="view-toggles">
+            <button class="action-btn" id="expandAllBtn" title="Expand all phases">Expand All</button>
+            <button class="action-btn" id="collapseAllBtn" title="Collapse all phases">Collapse All</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="curriculum-container" id="curriculumContainer"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-icon">🔍</div>
+      <h3>No problems found</h3>
+      <p>Try adjusting your search query or difficulty filters.</p>
+      <button class="action-btn" id="clearFiltersBtn">Reset Filters</button>
+    </div>
+  </main>
+</div>
+
 
 <script id="lc-data" type="application/json">[{"id":"two-pointers","title":"Two Pointers & Sliding Window","phases":[{"title":"Fundamentals","rows":[{"n":344,"t":"Reverse String","s":"reverse-string","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":125,"t":"Valid Palindrome","s":"valid-palindrome","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":167,"t":"Two Sum II - Input Array Is Sorted","s":"two-sum-ii-input-array-is-sorted","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":283,"t":"Move Zeroes","s":"move-zeroes","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":26,"t":"Remove Duplicates from Sorted Array","s":"remove-duplicates-from-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":27,"t":"Remove Element","s":"remove-element","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":977,"t":"Squares of a Sorted Array","s":"squares-of-a-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":88,"t":"Merge Sorted Array","s":"merge-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Opposite Pointers","rows":[{"n":11,"t":"Container With Most Water","s":"container-with-most-water","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":15,"t":"3Sum","s":"3sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":16,"t":"3Sum Closest","s":"3sum-closest","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":18,"t":"4Sum","s":"4sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":259,"t":"3Sum Smaller","s":"3sum-smaller","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":611,"t":"Valid Triangle Number","s":"valid-triangle-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":881,"t":"Boats to Save People","s":"boats-to-save-people","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Fast & Slow Pointers","rows":[{"n":141,"t":"Linked List Cycle","s":"linked-list-cycle","d":"E","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":142,"t":"Linked List Cycle II","s":"linked-list-cycle-ii","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":876,"t":"Middle of the Linked List","s":"middle-of-the-linked-list","d":"E","st":0,"tg":["Linked List","Two Pointers"],"r":false},{"n":202,"t":"Happy Number","s":"happy-number","d":"E","st":0,"tg":["Hash Table","Math"],"r":false},{"n":287,"t":"Find the Duplicate Number","s":"find-the-duplicate-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":457,"t":"Circular Array Loop","s":"circular-array-loop","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"Fixed Sliding Window","rows":[{"n":643,"t":"Maximum Average Subarray I","s":"maximum-average-subarray-i","d":"E","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1343,"t":"Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold","s":"number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1456,"t":"Maximum Number of Vowels in a Substring of Given Length","s":"maximum-number-of-vowels-in-a-substring-of-given-length","d":"M","st":0,"tg":["String","Sliding Window"],"r":false},{"n":1052,"t":"Grumpy Bookstore Owner","s":"grumpy-bookstore-owner","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":567,"t":"Permutation in String","s":"permutation-in-string","d":"M","st":1,"tg":["Hash Table","Two Pointers"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":1,"tg":["Hash Table","String"],"r":false}]},{"title":"Variable Sliding Window","rows":[{"n":28,"t":"Find the Index of the First Occurrence in a String","s":"find-the-index-of-the-first-occurrence-in-a-string","d":"E","st":3,"tg":["Two Pointers","String"],"r":false},{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1004,"t":"Max Consecutive Ones III","s":"max-consecutive-ones-iii","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1493,"t":"Longest Subarray of 1's After Deleting One Element","s":"longest-subarray-of-1s-after-deleting-one-element","d":"M","st":0,"tg":["Array","Dynamic Programming"],"r":false},{"n":713,"t":"Subarray Product Less Than K","s":"subarray-product-less-than-k","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":904,"t":"Fruit Into Baskets","s":"fruit-into-baskets","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1695,"t":"Maximum Erasure Value","s":"maximum-erasure-value","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1208,"t":"Get Equal Substrings Within Budget","s":"get-equal-substrings-within-budget","d":"M","st":0,"tg":["String","Binary Search"],"r":false}]},{"title":"Frequency Window","rows":[{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":424,"t":"Longest Repeating Character Replacement","s":"longest-repeating-character-replacement","d":"M","st":4,"tg":["Hash Table","String"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"At Most K","rows":[{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"Monotonic Deque","rows":[{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":5,"tg":["Array","Queue"],"r":false},{"n":1438,"t":"Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit","s":"longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit","d":"M","st":5,"tg":["Array","Queue"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":1499,"t":"Max Value of Equation","s":"max-value-of-equation","d":"H","st":0,"tg":["Array","Queue"],"r":false},{"n":1425,"t":"Constrained Subsequence Sum","s":"constrained-subsequence-sum","d":"H","st":0,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Capstone Review","rows":[{"n":42,"t":"Trapping Rain Water","s":"trapping-rain-water","d":"H","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":1498,"t":"Number of Subsequences That Satisfy the Given Sum Condition","s":"number-of-subsequences-that-satisfy-the-given-sum-condition","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":0,"tg":["Array","Queue"],"r":true}]}]},{"id":"prefix-sum","title":"Prefix Sum","phases":[{"title":"Foundation","rows":[{"n":1480,"t":"Running Sum of 1d Array","s":"running-sum-of-1d-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":303,"t":"Range Sum Query - Immutable","s":"range-sum-query-immutable","d":"E","st":0,"tg":["Array","Design"],"r":false},{"n":724,"t":"Find Pivot Index","s":"find-pivot-index","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1991,"t":"Find the Middle Index in Array","s":"find-the-middle-index-in-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":2574,"t":"Left and Right Sum Differences","s":"left-and-right-sum-differences","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1588,"t":"Sum of All Odd Length Subarrays","s":"sum-of-all-odd-length-subarrays","d":"E","st":0,"tg":["Array","Math"],"r":false},{"n":1732,"t":"Find the Highest Altitude","s":"find-the-highest-altitude","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false}]},{"title":"+ Hashmap","rows":[{"n":560,"t":"Subarray Sum Equals K","s":"subarray-sum-equals-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Modulo","rows":[{"n":523,"t":"Continuous Subarray Sum","s":"continuous-subarray-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":2845,"t":"Count of Interesting Subarrays","s":"count-of-interesting-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Transformation","rows":[{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1546,"t":"Maximum Number of Non-Overlapping Subarrays With Sum Equals Target","s":"maximum-number-of-non-overlapping-subarrays-with-sum-equals-target","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"2D Prefix Sum","rows":[{"n":1314,"t":"Matrix Block Sum","s":"matrix-block-sum","d":"M","st":0,"tg":["Array","Matrix"],"r":false},{"n":304,"t":"Range Sum Query 2D - Immutable","s":"range-sum-query-2d-immutable","d":"M","st":0,"tg":["Array","Design"],"r":false},{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1292,"t":"Maximum Side Length of a Square with Sum Less than or Equal to Threshold","s":"maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false}]},{"title":"+ Binary Search","rows":[{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":2389,"t":"Longest Subsequence With Limited Sum","s":"longest-subsequence-with-limited-sum","d":"E","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1170,"t":"Compare Strings by Frequency of the Smallest Character","s":"compare-strings-by-frequency-of-the-smallest-character","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":528,"t":"Random Pick with Weight","s":"random-pick-with-weight","d":"M","st":0,"tg":["Array","Math"],"r":false}]},{"title":"+ Monotonic Deque","rows":[{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ OrderedSet / Tree","rows":[{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ Hashmap + 2D","rows":[{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":true}]},{"title":"+ Difference Array","rows":[{"n":1109,"t":"Corporate Flight Bookings","s":"corporate-flight-bookings","d":"M","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":2536,"t":"Increment Submatrices by One","s":"increment-submatrices-by-one","d":"M","st":0,"tg":["Array","Matrix"],"r":false}]},{"title":"Capstone Review","rows":[{"n":327,"t":"Count of Range Sum","s":"count-of-range-sum","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":493,"t":"Reverse Pairs","s":"reverse-pairs","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":315,"t":"Count of Smaller Numbers After Self","s":"count-of-smaller-numbers-after-self","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1542,"t":"Find Longest Awesome Substring","s":"find-longest-awesome-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":false},{"n":1915,"t":"Number of Wonderful Substrings","s":"number-of-wonderful-substrings","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":1524,"t":"Number of Sub-arrays With Odd Sum","s":"number-of-sub-arrays-with-odd-sum","d":"M","st":0,"tg":["Array","Math"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1171,"t":"Remove Zero Sum Consecutive Nodes from Linked List","s":"remove-zero-sum-consecutive-nodes-from-linked-list","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":2483,"t":"Minimum Penalty for a Shop","s":"minimum-penalty-for-a-shop","d":"M","st":0,"tg":["String","Prefix Sum"],"r":false},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":true}]}]},{"id":"merge-intervals","title":"Merge Intervals","phases":[{"title":"Fundamentals","rows":[{"n":228,"t":"Summary Ranges","s":"summary-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":163,"t":"Missing Ranges","s":"missing-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":56,"t":"Merge Intervals","s":"merge-intervals","d":"M","st":1,"tg":["Array","Sorting"],"r":false},{"n":57,"t":"Insert Interval","s":"insert-interval","d":"M","st":1,"tg":["Array"],"r":false}]},{"title":"Overlap & Greedy","rows":[{"n":252,"t":"Meeting Rooms","s":"meeting-rooms","d":"E","st":0,"tg":["Array","Sorting"],"r":false},{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":4,"tg":["Array","Two Pointers"],"r":false},{"n":435,"t":"Non-overlapping Intervals","s":"non-overlapping-intervals","d":"M","st":3,"tg":["Array","Dynamic Programming"],"r":false},{"n":452,"t":"Minimum Number of Arrows to Burst Balloons","s":"minimum-number-of-arrows-to-burst-balloons","d":"M","st":3,"tg":["Array","Greedy"],"r":false},{"n":1288,"t":"Remove Covered Intervals","s":"remove-covered-intervals","d":"M","st":0,"tg":["Array","Sorting"],"r":false}]},{"title":"Interval Relationships","rows":[{"n":986,"t":"Interval List Intersections","s":"interval-list-intersections","d":"M","st":3,"tg":["Array","Two Pointers"],"r":false},{"n":763,"t":"Partition Labels","s":"partition-labels","d":"M","st":0,"tg":["Hash Table","Two Pointers"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":false}]},{"title":"Scheduling","rows":[{"n":1942,"t":"The Number of the Smallest Unoccupied Chair","s":"the-number-of-the-smallest-unoccupied-chair","d":"M","st":4,"tg":["Array","Hash Table"],"r":false},{"n":2402,"t":"Meeting Rooms III","s":"meeting-rooms-iii","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":4,"tg":["Array","Sweep Line"],"r":false}]},{"title":"Sweep Line","rows":[{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":731,"t":"My Calendar II","s":"my-calendar-ii","d":"M","st":4,"tg":["Array","Binary Search"],"r":false},{"n":732,"t":"My Calendar III","s":"my-calendar-iii","d":"H","st":5,"tg":["Binary Search","Design"],"r":false}]},{"title":"Interval + Heap","rows":[{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":0,"tg":["Array","Two Pointers"],"r":true},{"n":1851,"t":"Minimum Interval to Include Each Query","s":"minimum-interval-to-include-each-query","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":0,"tg":["Array","Sweep Line"],"r":true}]},{"title":"Interval Coverage","rows":[{"n":1024,"t":"Video Stitching","s":"video-stitching","d":"M","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1326,"t":"Minimum Number of Taps to Open to Water a Garden","s":"minimum-number-of-taps-to-open-to-water-a-garden","d":"H","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":true},{"n":715,"t":"Range Module","s":"range-module","d":"H","st":5,"tg":["Design","Segment Tree"],"r":false}]},{"title":"Capstone Review","rows":[{"n":218,"t":"The Skyline Problem","s":"the-skyline-problem","d":"H","st":0,"tg":["Array","Divide and Conquer"],"r":false},{"n":391,"t":"Perfect Rectangle","s":"perfect-rectangle","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":850,"t":"Rectangle Area II","s":"rectangle-area-ii","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false},{"n":699,"t":"Falling Squares","s":"falling-squares","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false}]}]}]</script>
 <script>
