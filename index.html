@@ -1773,12 +1773,32 @@ tr.solved .problem-link {
   const STORE_KEY = 'lc_tracker_solved_v1';
   const THEME_KEY = 'lc_tracker_theme_v1';
 
+  // Default preloaded progress from user LeetCode practice history (133 questions)
+  const DEFAULT_SOLVED = [
+    1, 2, 3, 6, 9, 11, 12, 13, 14, 15, 16, 20, 26, 27, 28, 35, 36, 42, 48, 49,
+    53, 56, 58, 66, 67, 70, 71, 75, 76, 88, 94, 100, 121, 125, 128, 136, 141,
+    142, 144, 150, 155, 165, 167, 168, 169, 171, 197, 205, 209, 217, 219, 228,
+    231, 238, 239, 242, 258, 268, 273, 283, 289, 292, 303, 319, 344, 349, 383,
+    387, 405, 415, 443, 485, 496, 500, 503, 504, 520, 557, 560, 566, 567, 643,
+    674, 706, 713, 724, 766, 832, 867, 977, 999, 1004, 1108, 1207, 1275, 1313,
+    1346, 1380, 1456, 1480, 1572, 1588, 1672, 1688, 1732, 1876, 1920, 1984,
+    2022, 2090, 2119, 2125, 2235, 2319, 2373, 2413, 2481, 2520, 2549, 2574,
+    2600, 2651, 2739, 2769, 2806, 2843, 2894, 2928, 3033, 3099, 3336, 3360, 3622
+  ];
+
   // State
   let solved = new Set();
   try {
     const raw = localStorage.getItem(STORE_KEY);
-    if (raw) solved = new Set(JSON.parse(raw));
-  } catch (e) {}
+    if (raw) {
+      solved = new Set(JSON.parse(raw));
+    } else {
+      solved = new Set(DEFAULT_SOLVED);
+      localStorage.setItem(STORE_KEY, JSON.stringify(DEFAULT_SOLVED));
+    }
+  } catch (e) {
+    solved = new Set(DEFAULT_SOLVED);
+  }
 
   let activeTab = 'roadmap';
   let activeDiff = 'all';
