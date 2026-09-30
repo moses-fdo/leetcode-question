@@ -2309,12 +2309,18 @@ tr.solved .problem-link {
         const parsed = JSON.parse(event.target.result);
         if (Array.isArray(parsed)) {
           let added = 0;
-          parsed.forEach(n => {
-            if (typeof n === 'number' && allProblemsMap.has(n) && !solved.has(n)) {
-              solved.add(n);
+          parsed.forEach(item => {
+            let num = null;
+            if (typeof item === 'number') num = item;
+            else if (typeof item === 'string') num = parseInt(item, 10);
+            else if (item && typeof item === 'object') {
+              num = item.n || item.id || item.number || item.num;
+            }
+            if (typeof num === 'number' && !isNaN(num) && allProblemsMap.has(num) && !solved.has(num)) {
+              solved.add(num);
               added++;
-            }}
-          );
+            }
+          });
           persist();
           // update checkboxes
           solved.forEach(n => syncCheckboxes(n));
