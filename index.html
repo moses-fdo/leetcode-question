@@ -1440,6 +1440,292 @@ tr.solved .problem-link {
   opacity: 0.6;
 }
 
+
+/* Linear Accent Line on Problem Rows */
+.problem-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all 0.18s var(--ease-spring);
+}
+.problem-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2.5px;
+  background: transparent;
+  transition: background 0.18s ease;
+}
+.problem-row:hover::before {
+  background: var(--accent);
+}
+.problem-row.solved::before {
+  background: var(--easy);
+}
+
+/* Phase Complete Badge */
+.phase-card.phase-complete {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.phase-done-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--easy);
+  background: var(--easy-bg);
+  border: 1px solid var(--easy-border);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* KPI Ribbon */
+.kpi-ribbon {
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+@media (max-width: 940px) {
+  .kpi-ribbon {
+    grid-template-columns: 1fr;
+  }
+}
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.2s var(--ease-spring);
+}
+.kpi-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.35);
+}
+.kpi-mastery {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.kpi-ring-wrapper {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+.kpi-ring-svg {
+  transform: rotate(-90deg);
+}
+.ring-bg {
+  fill: none;
+  stroke: var(--surface-hover);
+  stroke-width: 4.5;
+}
+.ring-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-dasharray: 150.8;
+  stroke-dashoffset: 150.8;
+  transition: stroke-dashoffset 0.6s var(--ease-spring);
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+.kpi-ring-percent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.kpi-info {
+  display: flex;
+  flex-direction: column;
+}
+.kpi-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+.kpi-value {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-value small {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.kpi-diff-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 3px;
+}
+.kpi-diff-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 4px;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.diff-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+.dot-e { background: var(--easy); box-shadow: 0 0 8px var(--easy); }
+.dot-m { background: var(--med); box-shadow: 0 0 8px var(--med); }
+.dot-h { background: var(--hard); box-shadow: 0 0 8px var(--hard); }
+.diff-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.diff-score {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.kpi-pat-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 3px;
+}
+.kpi-pat-row {
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.kpi-pat-row:hover {
+  opacity: 0.8;
+}
+.kpi-pat-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.kpi-pat-track {
+  height: 4px;
+  background: var(--surface-hover);
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+.kpi-pat-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 9999px;
+  width: 0%;
+  transition: width 0.4s var(--ease-spring);
+}
+
+/* Code Editor Lines */
+.code-line {
+  display: flex;
+  line-height: 1.65;
+}
+.line-num {
+  width: 32px;
+  flex-shrink: 0;
+  text-align: right;
+  padding-right: 14px;
+  color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+.line-content {
+  flex: 1;
+  white-space: pre;
+}
+
+/* Connected Study Plan Timeline */
+.schedule-grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 26px;
+}
+.schedule-grid::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 18px;
+  bottom: 26px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent) 0%, rgba(56, 189, 248, 0.15) 100%);
+  border-radius: 9999px;
+}
+.schedule-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  transition: all 0.22s var(--ease-spring);
+}
+.schedule-card::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--surface);
+  border: 2.5px solid var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+.schedule-card:hover {
+  border-color: var(--border-hover);
+  transform: translateX(4px);
+  box-shadow: 0 6px 24px -4px rgba(0, 0, 0, 0.4);
+}
+
 </style>
 </head>
 <body>
@@ -1596,6 +1882,61 @@ tr.solved .problem-link {
     </header>
 
     <div class="workspace-views-wrapper">
+      <!-- Executive KPI Ribbon -->
+      <div class="kpi-ribbon" id="kpiRibbon">
+        <div class="kpi-card kpi-mastery">
+          <div class="kpi-ring-wrapper">
+            <svg class="kpi-ring-svg" width="56" height="56" viewBox="0 0 58 58">
+              <circle class="ring-bg" cx="29" cy="29" r="24" />
+              <circle class="ring-fill" id="kpiRingFill" cx="29" cy="29" r="24" />
+            </svg>
+            <span class="kpi-ring-percent" id="kpiRingPercent">0%</span>
+          </div>
+          <div class="kpi-info">
+            <div class="kpi-label">Curriculum Mastery</div>
+            <div class="kpi-value"><span id="kpiSolved">0</span><small> / <span id="kpiTotal">110</span></small></div>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-diffs">
+          <div class="kpi-label">Difficulty Breakdown</div>
+          <div class="kpi-diff-pills">
+            <div class="kpi-diff-pill pill-e">
+              <span class="diff-dot dot-e"></span>
+              <span class="diff-title">Easy</span>
+              <span class="diff-score" id="kpiEasy">0/23</span>
+            </div>
+            <div class="kpi-diff-pill pill-m">
+              <span class="diff-dot dot-m"></span>
+              <span class="diff-title">Medium</span>
+              <span class="diff-score" id="kpiMed">0/62</span>
+            </div>
+            <div class="kpi-diff-pill pill-h">
+              <span class="diff-dot dot-h"></span>
+              <span class="diff-title">Hard</span>
+              <span class="diff-score" id="kpiHard">0/25</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-patterns">
+          <div class="kpi-label">Core Pattern Coverage</div>
+          <div class="kpi-pat-bars">
+            <div class="kpi-pat-row" data-jump-pat="two-pointers">
+              <div class="kpi-pat-title"><span>Two Pointers & Window</span> <span id="kpiPat1">0/56</span></div>
+              <div class="kpi-pat-track"><div class="kpi-pat-fill" id="kpiPatFill1"></div></div>
+            </div>
+            <div class="kpi-pat-row" data-jump-pat="prefix-sum">
+              <div class="kpi-pat-title"><span>Prefix Sum</span> <span id="kpiPat2">0/31</span></div>
+              <div class="kpi-pat-track"><div class="kpi-pat-fill" id="kpiPatFill2"></div></div>
+            </div>
+            <div class="kpi-pat-row" data-jump-pat="merge-intervals">
+              <div class="kpi-pat-title"><span>Merge Intervals</span> <span id="kpiPat3">0/23</span></div>
+              <div class="kpi-pat-track"><div class="kpi-pat-fill" id="kpiPatFill3"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- 1. Main Roadmap View -->
       <section class="view-pane active" id="viewRoadmap" role="tabpanel">
         <div id="curriculumContainer"></div>
@@ -2399,6 +2740,25 @@ tr.solved .problem-link {
     hardCountEl.textContent = `${hardSolved}/25`;
     mobileSolvedBadgeEl.textContent = `${doneUnique}/${totalUniqueCount}`;
 
+    // KPI Ribbon metrics
+    const kpiRingFill = document.getElementById('kpiRingFill');
+    const kpiRingPercent = document.getElementById('kpiRingPercent');
+    const kpiSolved = document.getElementById('kpiSolved');
+    const kpiEasy = document.getElementById('kpiEasy');
+    const kpiMed = document.getElementById('kpiMed');
+    const kpiHard = document.getElementById('kpiHard');
+
+    if (kpiSolved) kpiSolved.textContent = doneUnique;
+    if (kpiRingPercent) kpiRingPercent.textContent = pct + '%';
+    if (kpiRingFill) {
+      const circ = 150.8;
+      const offset = circ - (circ * pct) / 100;
+      kpiRingFill.style.strokeDashoffset = offset;
+    }
+    if (kpiEasy) kpiEasy.textContent = `${easySolved}/23`;
+    if (kpiMed) kpiMed.textContent = `${medSolved}/62`;
+    if (kpiHard) kpiHard.textContent = `${hardSolved}/25`;
+
     // Pattern & Phase metrics
     DATA.forEach(pattern => {
       const patternUniqueNums = new Set();
@@ -2420,6 +2780,16 @@ tr.solved .problem-link {
         navPatBadge.textContent = `${patternSolved}/${patternUniqueNums.size}`;
       }
 
+      // KPI Pattern Card Bar
+      const kpiPatMap = { 'two-pointers': ['kpiPat1', 'kpiPatFill1'], 'prefix-sum': ['kpiPat2', 'kpiPatFill2'], 'merge-intervals': ['kpiPat3', 'kpiPatFill3'] };
+      if (kpiPatMap[pattern.id]) {
+        const [textId, fillId] = kpiPatMap[pattern.id];
+        const tEl = document.getElementById(textId);
+        const fEl = document.getElementById(fillId);
+        if (tEl) tEl.textContent = `${patternSolved}/${patternUniqueNums.size}`;
+        if (fEl) fEl.style.width = (patternUniqueNums.size > 0 ? (patternSolved / patternUniqueNums.size) * 100 : 0) + '%';
+      }
+
       // Phases
       pattern.phases.forEach((phase, pIdx) => {
         const phaseId = `phase-${pattern.id}-${pIdx}`;
@@ -2431,6 +2801,21 @@ tr.solved .problem-link {
 
         const countBadge = phaseCard.querySelector('[data-phase-count]');
         if (countBadge) countBadge.textContent = `${phaseSolved}/${phase.rows.length}`;
+
+        // Complete state badge
+        phaseCard.classList.toggle('phase-complete', phaseSolved === phase.rows.length && phase.rows.length > 0);
+        let donePill = phaseCard.querySelector('.phase-done-pill');
+        if (phaseSolved === phase.rows.length && phase.rows.length > 0) {
+          if (!donePill) {
+            donePill = document.createElement('span');
+            donePill.className = 'phase-done-pill';
+            donePill.innerHTML = `✓ ALL SOLVED`;
+            const rGroup = phaseCard.querySelector('.phase-header-right');
+            if (rGroup) rGroup.prepend(donePill);
+          }
+        } else if (donePill) {
+          donePill.remove();
+        }
 
         // Confetti celebration on newly completed phase
         if (checkCelebration && phaseSolved === phase.rows.length && phase.rows.length > 0) {
@@ -2835,6 +3220,15 @@ tr.solved .problem-link {
     });
   }
 
+  function formatCodeWithLineNumbers(code) {
+    const lines = code.split('\n');
+    return lines.map((line, idx) => {
+      const lineNum = idx + 1;
+      const highlighted = highlightPython(line);
+      return `<div class="code-line"><span class="line-num">${lineNum}</span><span class="line-content">${highlighted || ' '}</span></div>`;
+    }).join('');
+  }
+
   function renderTemplates() {
     const grid = document.getElementById('templateGrid');
     grid.innerHTML = TEMPLATES.map((tmpl, idx) => `
@@ -2849,14 +3243,14 @@ tr.solved .problem-link {
             <span class="code-title">${tmpl.title}</span>
           </div>
           <div class="code-header-right">
-            <span class="lang-tag">Python 3</span>
+            <span class="lang-tag">Python 3.12</span>
             <button class="copy-btn" data-code-idx="${idx}">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
               Copy Code
             </button>
           </div>
         </div>
-        <pre class="code-block"><code>${highlightPython(tmpl.code)}</code></pre>
+        <div class="code-block">${formatCodeWithLineNumbers(tmpl.code)}</div>
       </div>
     `).join('');
 
@@ -2992,6 +3386,20 @@ tr.solved .problem-link {
         if (hBtn) hBtn.setAttribute('aria-expanded', 'true');
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         showToast('Navigated to study plan target');
+      }
+    });
+  });
+
+  
+  // KPI Pattern jump listener
+  document.querySelectorAll('[data-jump-pat]').forEach(row => {
+    row.addEventListener('click', () => {
+      const patId = row.dataset.jumpPat;
+      if (activeTab !== 'roadmap') switchTab('roadmap');
+      const targetSec = document.getElementById(patId);
+      if (targetSec) {
+        targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Jumped to ' + targetSec.querySelector('.pattern-title').textContent.trim());
       }
     });
   });
