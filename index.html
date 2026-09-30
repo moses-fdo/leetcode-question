@@ -186,6 +186,9 @@ body {
   display: none;
 }
 
+@media (max-width: 768px) {
+  .app-sidebar { width: 100%; }
+}
 @media (max-width: 840px) {
   .app-shell {
     flex-direction: column;
@@ -1934,6 +1937,14 @@ tr.solved .problem-link {
               <div class="kpi-pat-title"><span>Merge Intervals</span> <span id="kpiPat3">0/23</span></div>
               <div class="kpi-pat-track"><div class="kpi-pat-fill" id="kpiPatFill3"></div></div>
             </div>
+            <div class="kpi-pat-row" data-jump-pat="dynamic-programming">
+              <div class="kpi-pat-title"><span>Dynamic Programming</span> <span id="kpiPat4">0/39</span></div>
+              <div class="kpi-pat-track"><div class="kpi-pat-fill" id="kpiPatFill4"></div></div>
+            </div>
+            <div class="kpi-pat-row" data-jump-pat="graph-algorithms">
+              <div class="kpi-pat-title"><span>Graph Algorithms</span> <span id="kpiPat5">0/35</span></div>
+              <div class="kpi-pat-track"><div class="kpi-pat-fill" id="kpiPatFill5"></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -2075,6 +2086,120 @@ tr.solved .problem-link {
                   <td>Min-heap tracks currently active allocations by finish time; free on expire</td>
                   <td><span class="tag-badge">O(N log N) time · O(N) space</span></td>
                 </tr>
+                <tr>
+                  <td><b>1D Decision DP (Take / Skip)</b></td>
+                  <td>Adjacent dependency, maximize sum without adjacent, robber problems</td>
+                  <td><code>dp[i] = max(dp[i-1], nums[i] + dp[i-2])</code>; optimize to 2 variables</td>
+                  <td><span class="tag-badge">O(N) time · O(1) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Kadane / Subarray DP</b></td>
+                  <td>Max/min subarray sum/product contiguous segment</td>
+                  <td><code>dp[i] = max(nums[i], dp[i-1] + nums[i])</code>; product tracks min and max</td>
+                  <td><span class="tag-badge">O(N) time · O(1) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>0/1 Knapsack (Subset Sum)</b></td>
+                  <td>Target sum, partition equal subsets, item used at most once</td>
+                  <td>Reverse inner loop: <code>dp[w] = dp[w] || dp[w - num]</code> from target down to num</td>
+                  <td><span class="tag-badge">O(N·W) time · O(W) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Unbounded Knapsack (Coins)</b></td>
+                  <td>Min coins or coin combinations, items reusable infinitely</td>
+                  <td>Forward loop: outer coins = combinations; outer amount = permutations</td>
+                  <td><span class="tag-badge">O(N·A) time · O(A) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>2D Grid DP</b></td>
+                  <td>Unique paths, minimum path sum, obstacle avoidance</td>
+                  <td><code>dp[r][c] = grid[r][c] + min(dp[r-1][c], dp[r][c-1])</code>; compress to 1 row</td>
+                  <td><span class="tag-badge">O(R·C) time · O(C) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>LIS (Increasing Subsequence)</b></td>
+                  <td>Longest increasing subsequence, non-overlapping envelopes</td>
+                  <td>Patience sorting with binary search on <code>tails</code> array</td>
+                  <td><span class="tag-badge">O(N log N) time · O(N) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>2D String Alignment (LCS / Edit)</b></td>
+                  <td>Longest common subsequence, edit distance, string transforms</td>
+                  <td>Match: <code>dp[i-1][j-1]</code>; Mismatch: <code>min/max(dp[i-1][j], dp[i][j-1])</code></td>
+                  <td><span class="tag-badge">O(M·N) time · O(N) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>State Machine DP (Stocks)</b></td>
+                  <td>Buying/selling stocks with cooldown, fees, or k transactions</td>
+                  <td>Explicit state variables (<code>hold</code>, <code>sold</code>, <code>rest</code>) with transitions</td>
+                  <td><span class="tag-badge">O(N) time · O(1) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Interval DP</b></td>
+                  <td>Burst balloons, merge stones, matrix chain multiplication</td>
+                  <td>Loop chain length $L$, then left $i$, then split point $k \in [i+1, j-1]$</td>
+                  <td><span class="tag-badge">O(N³) time · O(N²) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Tree DP</b></td>
+                  <td>Binary tree camera placement, max path sum, tree robbery</td>
+                  <td>Post-order DFS returning state tuple (e.g. <code>(rob, not_rob)</code>) to parent</td>
+                  <td><span class="tag-badge">O(N) time · O(H) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Bitmask & Graph DP</b></td>
+                  <td>Visit all nodes (TSP), partition to K subsets, matrix DAG path</td>
+                  <td>State representation with bitmask integers <code>dp[mask][u]</code> or DFS + memo</td>
+                  <td><span class="tag-badge">O(N²·2ᴺ) time · O(N·2ᴺ) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Disjoint Set (Union-Find)</b></td>
+                  <td>Connected components, dynamic connectivity, cycle detection in undirected graph</td>
+                  <td>Find with path compression, Union by rank: <code>find(x) == find(y)</code> indicates cycle</td>
+                  <td><span class="tag-badge">O(α(N)) amortized · O(N) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Grid as Graph</b></td>
+                  <td>Matrix traversal, island counts, perimeter, multi-source rotting / spreading</td>
+                  <td>Multi-source BFS queue initialization or 4-directional DFS boundary sinking</td>
+                  <td><span class="tag-badge">O(R·C) time · O(R·C) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Bipartite Graph (2-Coloring)</b></td>
+                  <td>Verify if vertices can be partitioned into 2 independent sets</td>
+                  <td>BFS/DFS alternating color assignment (0 and 1); conflict indicates odd cycle</td>
+                  <td><span class="tag-badge">O(V + E) time · O(V) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Kahn's Algorithm (Topological)</b></td>
+                  <td>Task scheduling with dependencies, compile ordering, cycle detection in DAG</td>
+                  <td>Compute in-degrees; enqueue 0 in-degree nodes; pop and decrement neighbor in-degrees</td>
+                  <td><span class="tag-badge">O(V + E) time · O(V + E) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Dijkstra's Algorithm</b></td>
+                  <td>Single-source shortest path on weighted graph with non-negative edge weights</td>
+                  <td>Min-heap priority queue storing <code>(dist, node)</code>; relax edge if <code>d + w &lt; dist[v]</code></td>
+                  <td><span class="tag-badge">O(E log V) time · O(V) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Floyd-Warshall Algorithm</b></td>
+                  <td>All-pairs shortest paths or transitive reachability on dense graphs</td>
+                  <td>3 nested loops (intermediate $k$ outermost): <code>dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])</code></td>
+                  <td><span class="tag-badge">O(V³) time · O(V²) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Kruskal & Prim MST</b></td>
+                  <td>Minimum cost to connect all vertices into a single spanning tree</td>
+                  <td>Kruskal: sort edges and add via Union-Find; Prim: greedy min-heap cut relaxation</td>
+                  <td><span class="tag-badge">O(E log E) time · O(V + E) space</span></td>
+                </tr>
+                <tr>
+                  <td><b>Binary Lifting (Tree Ancestor)</b></td>
+                  <td>$K$-th ancestor of tree node, Lowest Common Ancestor (LCA) queries in $O(\log N)$</td>
+                  <td>DP table <code>up[u][k] = up[up[u][k-1]][k-1]</code> storing powers-of-two ancestors</td>
+                  <td><span class="tag-badge">O(N log N) prep · O(log N) query</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -2214,7 +2339,7 @@ tr.solved .problem-link {
 <div class="toast" id="toastMessage"></div>
 
 <!-- JSON Curriculum Data -->
-<script id="lc-data" type="application/json">[{"id":"two-pointers","title":"Two Pointers & Sliding Window","phases":[{"title":"Fundamentals","rows":[{"n":344,"t":"Reverse String","s":"reverse-string","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":125,"t":"Valid Palindrome","s":"valid-palindrome","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":167,"t":"Two Sum II - Input Array Is Sorted","s":"two-sum-ii-input-array-is-sorted","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":283,"t":"Move Zeroes","s":"move-zeroes","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":26,"t":"Remove Duplicates from Sorted Array","s":"remove-duplicates-from-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":27,"t":"Remove Element","s":"remove-element","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":977,"t":"Squares of a Sorted Array","s":"squares-of-a-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":88,"t":"Merge Sorted Array","s":"merge-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Opposite Pointers","rows":[{"n":11,"t":"Container With Most Water","s":"container-with-most-water","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":15,"t":"3Sum","s":"3sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":16,"t":"3Sum Closest","s":"3sum-closest","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":18,"t":"4Sum","s":"4sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":259,"t":"3Sum Smaller","s":"3sum-smaller","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":611,"t":"Valid Triangle Number","s":"valid-triangle-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":881,"t":"Boats to Save People","s":"boats-to-save-people","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Fast & Slow Pointers","rows":[{"n":141,"t":"Linked List Cycle","s":"linked-list-cycle","d":"E","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":142,"t":"Linked List Cycle II","s":"linked-list-cycle-ii","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":876,"t":"Middle of the Linked List","s":"middle-of-the-linked-list","d":"E","st":0,"tg":["Linked List","Two Pointers"],"r":false},{"n":202,"t":"Happy Number","s":"happy-number","d":"E","st":0,"tg":["Hash Table","Math"],"r":false},{"n":287,"t":"Find the Duplicate Number","s":"find-the-duplicate-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":457,"t":"Circular Array Loop","s":"circular-array-loop","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"Fixed Sliding Window","rows":[{"n":643,"t":"Maximum Average Subarray I","s":"maximum-average-subarray-i","d":"E","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1343,"t":"Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold","s":"number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1456,"t":"Maximum Number of Vowels in a Substring of Given Length","s":"maximum-number-of-vowels-in-a-substring-of-given-length","d":"M","st":0,"tg":["String","Sliding Window"],"r":false},{"n":1052,"t":"Grumpy Bookstore Owner","s":"grumpy-bookstore-owner","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":567,"t":"Permutation in String","s":"permutation-in-string","d":"M","st":1,"tg":["Hash Table","Two Pointers"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":1,"tg":["Hash Table","String"],"r":false}]},{"title":"Variable Sliding Window","rows":[{"n":28,"t":"Find the Index of the First Occurrence in a String","s":"find-the-index-of-the-first-occurrence-in-a-string","d":"E","st":3,"tg":["Two Pointers","String"],"r":false},{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1004,"t":"Max Consecutive Ones III","s":"max-consecutive-ones-iii","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1493,"t":"Longest Subarray of 1's After Deleting One Element","s":"longest-subarray-of-1s-after-deleting-one-element","d":"M","st":0,"tg":["Array","Dynamic Programming"],"r":false},{"n":713,"t":"Subarray Product Less Than K","s":"subarray-product-less-than-k","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":904,"t":"Fruit Into Baskets","s":"fruit-into-baskets","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1695,"t":"Maximum Erasure Value","s":"maximum-erasure-value","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1208,"t":"Get Equal Substrings Within Budget","s":"get-equal-substrings-within-budget","d":"M","st":0,"tg":["String","Binary Search"],"r":false}]},{"title":"Frequency Window","rows":[{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":424,"t":"Longest Repeating Character Replacement","s":"longest-repeating-character-replacement","d":"M","st":4,"tg":["Hash Table","String"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"At Most K","rows":[{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"Monotonic Deque","rows":[{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":5,"tg":["Array","Queue"],"r":false},{"n":1438,"t":"Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit","s":"longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit","d":"M","st":5,"tg":["Array","Queue"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":1499,"t":"Max Value of Equation","s":"max-value-of-equation","d":"H","st":0,"tg":["Array","Queue"],"r":false},{"n":1425,"t":"Constrained Subsequence Sum","s":"constrained-subsequence-sum","d":"H","st":0,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Capstone Review","rows":[{"n":42,"t":"Trapping Rain Water","s":"trapping-rain-water","d":"H","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":1498,"t":"Number of Subsequences That Satisfy the Given Sum Condition","s":"number-of-subsequences-that-satisfy-the-given-sum-condition","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":0,"tg":["Array","Queue"],"r":true}]}]},{"id":"prefix-sum","title":"Prefix Sum","phases":[{"title":"Foundation","rows":[{"n":1480,"t":"Running Sum of 1d Array","s":"running-sum-of-1d-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":303,"t":"Range Sum Query - Immutable","s":"range-sum-query-immutable","d":"E","st":0,"tg":["Array","Design"],"r":false},{"n":724,"t":"Find Pivot Index","s":"find-pivot-index","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1991,"t":"Find the Middle Index in Array","s":"find-the-middle-index-in-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":2574,"t":"Left and Right Sum Differences","s":"left-and-right-sum-differences","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1588,"t":"Sum of All Odd Length Subarrays","s":"sum-of-all-odd-length-subarrays","d":"E","st":0,"tg":["Array","Math"],"r":false},{"n":1732,"t":"Find the Highest Altitude","s":"find-the-highest-altitude","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false}]},{"title":"+ Hashmap","rows":[{"n":560,"t":"Subarray Sum Equals K","s":"subarray-sum-equals-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Modulo","rows":[{"n":523,"t":"Continuous Subarray Sum","s":"continuous-subarray-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":2845,"t":"Count of Interesting Subarrays","s":"count-of-interesting-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Transformation","rows":[{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1546,"t":"Maximum Number of Non-Overlapping Subarrays With Sum Equals Target","s":"maximum-number-of-non-overlapping-subarrays-with-sum-equals-target","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"2D Prefix Sum","rows":[{"n":1314,"t":"Matrix Block Sum","s":"matrix-block-sum","d":"M","st":0,"tg":["Array","Matrix"],"r":false},{"n":304,"t":"Range Sum Query 2D - Immutable","s":"range-sum-query-2d-immutable","d":"M","st":0,"tg":["Array","Design"],"r":false},{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1292,"t":"Maximum Side Length of a Square with Sum Less than or Equal to Threshold","s":"maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false}]},{"title":"+ Binary Search","rows":[{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":2389,"t":"Longest Subsequence With Limited Sum","s":"longest-subsequence-with-limited-sum","d":"E","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1170,"t":"Compare Strings by Frequency of the Smallest Character","s":"compare-strings-by-frequency-of-the-smallest-character","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":528,"t":"Random Pick with Weight","s":"random-pick-with-weight","d":"M","st":0,"tg":["Array","Math"],"r":false}]},{"title":"+ Monotonic Deque","rows":[{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ OrderedSet / Tree","rows":[{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ Hashmap + 2D","rows":[{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":true}]},{"title":"+ Difference Array","rows":[{"n":1109,"t":"Corporate Flight Bookings","s":"corporate-flight-bookings","d":"M","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":2536,"t":"Increment Submatrices by One","s":"increment-submatrices-by-one","d":"M","st":0,"tg":["Array","Matrix"],"r":false}]},{"title":"Capstone Review","rows":[{"n":327,"t":"Count of Range Sum","s":"count-of-range-sum","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":493,"t":"Reverse Pairs","s":"reverse-pairs","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":315,"t":"Count of Smaller Numbers After Self","s":"count-of-smaller-numbers-after-self","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1542,"t":"Find Longest Awesome Substring","s":"find-longest-awesome-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":false},{"n":1915,"t":"Number of Wonderful Substrings","s":"number-of-wonderful-substrings","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":1524,"t":"Number of Sub-arrays With Odd Sum","s":"number-of-sub-arrays-with-odd-sum","d":"M","st":0,"tg":["Array","Math"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1171,"t":"Remove Zero Sum Consecutive Nodes from Linked List","s":"remove-zero-sum-consecutive-nodes-from-linked-list","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":2483,"t":"Minimum Penalty for a Shop","s":"minimum-penalty-for-a-shop","d":"M","st":0,"tg":["String","Prefix Sum"],"r":false},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":true}]}]},{"id":"merge-intervals","title":"Merge Intervals","phases":[{"title":"Fundamentals","rows":[{"n":228,"t":"Summary Ranges","s":"summary-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":163,"t":"Missing Ranges","s":"missing-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":56,"t":"Merge Intervals","s":"merge-intervals","d":"M","st":1,"tg":["Array","Sorting"],"r":false},{"n":57,"t":"Insert Interval","s":"insert-interval","d":"M","st":1,"tg":["Array"],"r":false}]},{"title":"Overlap & Greedy","rows":[{"n":252,"t":"Meeting Rooms","s":"meeting-rooms","d":"E","st":0,"tg":["Array","Sorting"],"r":false},{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":4,"tg":["Array","Two Pointers"],"r":false},{"n":435,"t":"Non-overlapping Intervals","s":"non-overlapping-intervals","d":"M","st":3,"tg":["Array","Dynamic Programming"],"r":false},{"n":452,"t":"Minimum Number of Arrows to Burst Balloons","s":"minimum-number-of-arrows-to-burst-balloons","d":"M","st":3,"tg":["Array","Greedy"],"r":false},{"n":1288,"t":"Remove Covered Intervals","s":"remove-covered-intervals","d":"M","st":0,"tg":["Array","Sorting"],"r":false}]},{"title":"Interval Relationships","rows":[{"n":986,"t":"Interval List Intersections","s":"interval-list-intersections","d":"M","st":3,"tg":["Array","Two Pointers"],"r":false},{"n":763,"t":"Partition Labels","s":"partition-labels","d":"M","st":0,"tg":["Hash Table","Two Pointers"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":false}]},{"title":"Scheduling","rows":[{"n":1942,"t":"The Number of the Smallest Unoccupied Chair","s":"the-number-of-the-smallest-unoccupied-chair","d":"M","st":4,"tg":["Array","Hash Table"],"r":false},{"n":2402,"t":"Meeting Rooms III","s":"meeting-rooms-iii","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":4,"tg":["Array","Sweep Line"],"r":false}]},{"title":"Sweep Line","rows":[{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":731,"t":"My Calendar II","s":"my-calendar-ii","d":"M","st":4,"tg":["Array","Binary Search"],"r":false},{"n":732,"t":"My Calendar III","s":"my-calendar-iii","d":"H","st":5,"tg":["Binary Search","Design"],"r":false}]},{"title":"Interval + Heap","rows":[{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":0,"tg":["Array","Two Pointers"],"r":true},{"n":1851,"t":"Minimum Interval to Include Each Query","s":"minimum-interval-to-include-each-query","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":0,"tg":["Array","Sweep Line"],"r":true}]},{"title":"Interval Coverage","rows":[{"n":1024,"t":"Video Stitching","s":"video-stitching","d":"M","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1326,"t":"Minimum Number of Taps to Open to Water a Garden","s":"minimum-number-of-taps-to-open-to-water-a-garden","d":"H","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":true},{"n":715,"t":"Range Module","s":"range-module","d":"H","st":5,"tg":["Design","Segment Tree"],"r":false}]},{"title":"Capstone Review","rows":[{"n":218,"t":"The Skyline Problem","s":"the-skyline-problem","d":"H","st":0,"tg":["Array","Divide and Conquer"],"r":false},{"n":391,"t":"Perfect Rectangle","s":"perfect-rectangle","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":850,"t":"Rectangle Area II","s":"rectangle-area-ii","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false},{"n":699,"t":"Falling Squares","s":"falling-squares","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false}]}]}]</script>
+<script id="lc-data" type="application/json">[{"id":"two-pointers","title":"Two Pointers & Sliding Window","phases":[{"title":"Fundamentals","rows":[{"n":344,"t":"Reverse String","s":"reverse-string","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":125,"t":"Valid Palindrome","s":"valid-palindrome","d":"E","st":0,"tg":["Two Pointers","String"],"r":false},{"n":167,"t":"Two Sum II - Input Array Is Sorted","s":"two-sum-ii-input-array-is-sorted","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":283,"t":"Move Zeroes","s":"move-zeroes","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":26,"t":"Remove Duplicates from Sorted Array","s":"remove-duplicates-from-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":27,"t":"Remove Element","s":"remove-element","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":977,"t":"Squares of a Sorted Array","s":"squares-of-a-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":88,"t":"Merge Sorted Array","s":"merge-sorted-array","d":"E","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Opposite Pointers","rows":[{"n":11,"t":"Container With Most Water","s":"container-with-most-water","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":15,"t":"3Sum","s":"3sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":16,"t":"3Sum Closest","s":"3sum-closest","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":18,"t":"4Sum","s":"4sum","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":259,"t":"3Sum Smaller","s":"3sum-smaller","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":611,"t":"Valid Triangle Number","s":"valid-triangle-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":881,"t":"Boats to Save People","s":"boats-to-save-people","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false}]},{"title":"Fast & Slow Pointers","rows":[{"n":141,"t":"Linked List Cycle","s":"linked-list-cycle","d":"E","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":142,"t":"Linked List Cycle II","s":"linked-list-cycle-ii","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":876,"t":"Middle of the Linked List","s":"middle-of-the-linked-list","d":"E","st":0,"tg":["Linked List","Two Pointers"],"r":false},{"n":202,"t":"Happy Number","s":"happy-number","d":"E","st":0,"tg":["Hash Table","Math"],"r":false},{"n":287,"t":"Find the Duplicate Number","s":"find-the-duplicate-number","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":457,"t":"Circular Array Loop","s":"circular-array-loop","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"Fixed Sliding Window","rows":[{"n":643,"t":"Maximum Average Subarray I","s":"maximum-average-subarray-i","d":"E","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1343,"t":"Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold","s":"number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":1456,"t":"Maximum Number of Vowels in a Substring of Given Length","s":"maximum-number-of-vowels-in-a-substring-of-given-length","d":"M","st":0,"tg":["String","Sliding Window"],"r":false},{"n":1052,"t":"Grumpy Bookstore Owner","s":"grumpy-bookstore-owner","d":"M","st":0,"tg":["Array","Sliding Window"],"r":false},{"n":567,"t":"Permutation in String","s":"permutation-in-string","d":"M","st":1,"tg":["Hash Table","Two Pointers"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":1,"tg":["Hash Table","String"],"r":false}]},{"title":"Variable Sliding Window","rows":[{"n":28,"t":"Find the Index of the First Occurrence in a String","s":"find-the-index-of-the-first-occurrence-in-a-string","d":"E","st":3,"tg":["Two Pointers","String"],"r":false},{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1004,"t":"Max Consecutive Ones III","s":"max-consecutive-ones-iii","d":"M","st":1,"tg":["Array","Binary Search"],"r":false},{"n":1493,"t":"Longest Subarray of 1's After Deleting One Element","s":"longest-subarray-of-1s-after-deleting-one-element","d":"M","st":0,"tg":["Array","Dynamic Programming"],"r":false},{"n":713,"t":"Subarray Product Less Than K","s":"subarray-product-less-than-k","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":904,"t":"Fruit Into Baskets","s":"fruit-into-baskets","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1695,"t":"Maximum Erasure Value","s":"maximum-erasure-value","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1208,"t":"Get Equal Substrings Within Budget","s":"get-equal-substrings-within-budget","d":"M","st":0,"tg":["String","Binary Search"],"r":false}]},{"title":"Frequency Window","rows":[{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":424,"t":"Longest Repeating Character Replacement","s":"longest-repeating-character-replacement","d":"M","st":4,"tg":["Hash Table","String"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":5,"tg":["Hash Table","String"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":438,"t":"Find All Anagrams in a String","s":"find-all-anagrams-in-a-string","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"At Most K","rows":[{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1358,"t":"Number of Substrings Containing All Three Characters","s":"number-of-substrings-containing-all-three-characters","d":"M","st":0,"tg":["Hash Table","String"],"r":true}]},{"title":"Monotonic Deque","rows":[{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":5,"tg":["Array","Queue"],"r":false},{"n":1438,"t":"Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit","s":"longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit","d":"M","st":5,"tg":["Array","Queue"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":1499,"t":"Max Value of Equation","s":"max-value-of-equation","d":"H","st":0,"tg":["Array","Queue"],"r":false},{"n":1425,"t":"Constrained Subsequence Sum","s":"constrained-subsequence-sum","d":"H","st":0,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Capstone Review","rows":[{"n":42,"t":"Trapping Rain Water","s":"trapping-rain-water","d":"H","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":1498,"t":"Number of Subsequences That Satisfy the Given Sum Condition","s":"number-of-subsequences-that-satisfy-the-given-sum-condition","d":"M","st":0,"tg":["Array","Two Pointers"],"r":false},{"n":30,"t":"Substring with Concatenation of All Words","s":"substring-with-concatenation-of-all-words","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":76,"t":"Minimum Window Substring","s":"minimum-window-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":true},{"n":992,"t":"Subarrays with K Different Integers","s":"subarrays-with-k-different-integers","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":239,"t":"Sliding Window Maximum","s":"sliding-window-maximum","d":"H","st":0,"tg":["Array","Queue"],"r":true}]}]},{"id":"prefix-sum","title":"Prefix Sum","phases":[{"title":"Foundation","rows":[{"n":1480,"t":"Running Sum of 1d Array","s":"running-sum-of-1d-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":303,"t":"Range Sum Query - Immutable","s":"range-sum-query-immutable","d":"E","st":0,"tg":["Array","Design"],"r":false},{"n":724,"t":"Find Pivot Index","s":"find-pivot-index","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1991,"t":"Find the Middle Index in Array","s":"find-the-middle-index-in-array","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":2574,"t":"Left and Right Sum Differences","s":"left-and-right-sum-differences","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1588,"t":"Sum of All Odd Length Subarrays","s":"sum-of-all-odd-length-subarrays","d":"E","st":0,"tg":["Array","Math"],"r":false},{"n":1732,"t":"Find the Highest Altitude","s":"find-the-highest-altitude","d":"E","st":0,"tg":["Array","Prefix Sum"],"r":false}]},{"title":"+ Hashmap","rows":[{"n":560,"t":"Subarray Sum Equals K","s":"subarray-sum-equals-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":930,"t":"Binary Subarrays With Sum","s":"binary-subarrays-with-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1248,"t":"Count Number of Nice Subarrays","s":"count-number-of-nice-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Modulo","rows":[{"n":523,"t":"Continuous Subarray Sum","s":"continuous-subarray-sum","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":974,"t":"Subarray Sums Divisible by K","s":"subarray-sums-divisible-by-k","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1590,"t":"Make Sum Divisible by P","s":"make-sum-divisible-by-p","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":2845,"t":"Count of Interesting Subarrays","s":"count-of-interesting-subarrays","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"+ Transformation","rows":[{"n":525,"t":"Contiguous Array","s":"contiguous-array","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":2488,"t":"Count Subarrays With Median K","s":"count-subarrays-with-median-k","d":"H","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1546,"t":"Maximum Number of Non-Overlapping Subarrays With Sum Equals Target","s":"maximum-number-of-non-overlapping-subarrays-with-sum-equals-target","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":false}]},{"title":"2D Prefix Sum","rows":[{"n":1314,"t":"Matrix Block Sum","s":"matrix-block-sum","d":"M","st":0,"tg":["Array","Matrix"],"r":false},{"n":304,"t":"Range Sum Query 2D - Immutable","s":"range-sum-query-2d-immutable","d":"M","st":0,"tg":["Array","Design"],"r":false},{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":1292,"t":"Maximum Side Length of a Square with Sum Less than or Equal to Threshold","s":"maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false}]},{"title":"+ Binary Search","rows":[{"n":209,"t":"Minimum Size Subarray Sum","s":"minimum-size-subarray-sum","d":"M","st":0,"tg":["Array","Binary Search"],"r":false},{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":2389,"t":"Longest Subsequence With Limited Sum","s":"longest-subsequence-with-limited-sum","d":"E","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1170,"t":"Compare Strings by Frequency of the Smallest Character","s":"compare-strings-by-frequency-of-the-smallest-character","d":"M","st":0,"tg":["Array","Hash Table"],"r":false},{"n":528,"t":"Random Pick with Weight","s":"random-pick-with-weight","d":"M","st":0,"tg":["Array","Math"],"r":false}]},{"title":"+ Monotonic Deque","rows":[{"n":862,"t":"Shortest Subarray with Sum at Least K","s":"shortest-subarray-with-sum-at-least-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ OrderedSet / Tree","rows":[{"n":363,"t":"Max Sum of Rectangle No Larger Than K","s":"max-sum-of-rectangle-no-larger-than-k","d":"H","st":0,"tg":["Array","Binary Search"],"r":true}]},{"title":"+ Hashmap + 2D","rows":[{"n":1074,"t":"Number of Submatrices That Sum to Target","s":"number-of-submatrices-that-sum-to-target","d":"H","st":0,"tg":["Array","Hash Table"],"r":true}]},{"title":"+ Difference Array","rows":[{"n":1109,"t":"Corporate Flight Bookings","s":"corporate-flight-bookings","d":"M","st":0,"tg":["Array","Prefix Sum"],"r":false},{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":2536,"t":"Increment Submatrices by One","s":"increment-submatrices-by-one","d":"M","st":0,"tg":["Array","Matrix"],"r":false}]},{"title":"Capstone Review","rows":[{"n":327,"t":"Count of Range Sum","s":"count-of-range-sum","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":493,"t":"Reverse Pairs","s":"reverse-pairs","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":315,"t":"Count of Smaller Numbers After Self","s":"count-of-smaller-numbers-after-self","d":"H","st":0,"tg":["Array","Binary Search"],"r":false},{"n":1542,"t":"Find Longest Awesome Substring","s":"find-longest-awesome-substring","d":"H","st":0,"tg":["Hash Table","String"],"r":false},{"n":1915,"t":"Number of Wonderful Substrings","s":"number-of-wonderful-substrings","d":"M","st":0,"tg":["Hash Table","String"],"r":false},{"n":1524,"t":"Number of Sub-arrays With Odd Sum","s":"number-of-sub-arrays-with-odd-sum","d":"M","st":0,"tg":["Array","Math"],"r":false},{"n":1442,"t":"Count Triplets That Can Form Two Arrays of Equal XOR","s":"count-triplets-that-can-form-two-arrays-of-equal-xor","d":"M","st":0,"tg":["Array","Hash Table"],"r":true},{"n":1171,"t":"Remove Zero Sum Consecutive Nodes from Linked List","s":"remove-zero-sum-consecutive-nodes-from-linked-list","d":"M","st":0,"tg":["Hash Table","Linked List"],"r":false},{"n":2483,"t":"Minimum Penalty for a Shop","s":"minimum-penalty-for-a-shop","d":"M","st":0,"tg":["String","Prefix Sum"],"r":false},{"n":1124,"t":"Longest Well-Performing Interval","s":"longest-well-performing-interval","d":"M","st":0,"tg":["Array","Hash Table"],"r":true}]}]},{"id":"merge-intervals","title":"Merge Intervals","phases":[{"title":"Fundamentals","rows":[{"n":228,"t":"Summary Ranges","s":"summary-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":163,"t":"Missing Ranges","s":"missing-ranges","d":"E","st":0,"tg":["Array"],"r":false},{"n":56,"t":"Merge Intervals","s":"merge-intervals","d":"M","st":1,"tg":["Array","Sorting"],"r":false},{"n":57,"t":"Insert Interval","s":"insert-interval","d":"M","st":1,"tg":["Array"],"r":false}]},{"title":"Overlap & Greedy","rows":[{"n":252,"t":"Meeting Rooms","s":"meeting-rooms","d":"E","st":0,"tg":["Array","Sorting"],"r":false},{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":4,"tg":["Array","Two Pointers"],"r":false},{"n":435,"t":"Non-overlapping Intervals","s":"non-overlapping-intervals","d":"M","st":3,"tg":["Array","Dynamic Programming"],"r":false},{"n":452,"t":"Minimum Number of Arrows to Burst Balloons","s":"minimum-number-of-arrows-to-burst-balloons","d":"M","st":3,"tg":["Array","Greedy"],"r":false},{"n":1288,"t":"Remove Covered Intervals","s":"remove-covered-intervals","d":"M","st":0,"tg":["Array","Sorting"],"r":false}]},{"title":"Interval Relationships","rows":[{"n":986,"t":"Interval List Intersections","s":"interval-list-intersections","d":"M","st":3,"tg":["Array","Two Pointers"],"r":false},{"n":763,"t":"Partition Labels","s":"partition-labels","d":"M","st":0,"tg":["Hash Table","Two Pointers"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":false}]},{"title":"Scheduling","rows":[{"n":1942,"t":"The Number of the Smallest Unoccupied Chair","s":"the-number-of-the-smallest-unoccupied-chair","d":"M","st":4,"tg":["Array","Hash Table"],"r":false},{"n":2402,"t":"Meeting Rooms III","s":"meeting-rooms-iii","d":"H","st":5,"tg":["Array","Hash Table"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":4,"tg":["Array","Sweep Line"],"r":false}]},{"title":"Sweep Line","rows":[{"n":1094,"t":"Car Pooling","s":"car-pooling","d":"M","st":0,"tg":["Array","Sorting"],"r":false},{"n":731,"t":"My Calendar II","s":"my-calendar-ii","d":"M","st":4,"tg":["Array","Binary Search"],"r":false},{"n":732,"t":"My Calendar III","s":"my-calendar-iii","d":"H","st":5,"tg":["Binary Search","Design"],"r":false}]},{"title":"Interval + Heap","rows":[{"n":253,"t":"Meeting Rooms II","s":"meeting-rooms-ii","d":"M","st":0,"tg":["Array","Two Pointers"],"r":true},{"n":1851,"t":"Minimum Interval to Include Each Query","s":"minimum-interval-to-include-each-query","d":"H","st":5,"tg":["Array","Binary Search"],"r":false},{"n":759,"t":"Employee Free Time","s":"employee-free-time","d":"H","st":0,"tg":["Array","Sweep Line"],"r":true}]},{"title":"Interval Coverage","rows":[{"n":1024,"t":"Video Stitching","s":"video-stitching","d":"M","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1326,"t":"Minimum Number of Taps to Open to Water a Garden","s":"minimum-number-of-taps-to-open-to-water-a-garden","d":"H","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":1272,"t":"Remove Interval","s":"remove-interval","d":"M","st":0,"tg":["Array"],"r":true},{"n":715,"t":"Range Module","s":"range-module","d":"H","st":5,"tg":["Design","Segment Tree"],"r":false}]},{"title":"Capstone Review","rows":[{"n":218,"t":"The Skyline Problem","s":"the-skyline-problem","d":"H","st":0,"tg":["Array","Divide and Conquer"],"r":false},{"n":391,"t":"Perfect Rectangle","s":"perfect-rectangle","d":"H","st":0,"tg":["Array","Hash Table"],"r":false},{"n":850,"t":"Rectangle Area II","s":"rectangle-area-ii","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false},{"n":699,"t":"Falling Squares","s":"falling-squares","d":"H","st":0,"tg":["Array","Segment Tree"],"r":false}]}]},{"id":"dynamic-programming","title":"Dynamic Programming","phases":[{"title":"1D Decision DP (Take / Skip)","rows":[{"n":70,"t":"Climbing Stairs","s":"climbing-stairs","d":"E","st":0,"tg":["Dynamic Programming","Math"],"r":false},{"n":198,"t":"House Robber","s":"house-robber","d":"M","st":5,"tg":["Array","Dynamic Programming"],"r":false},{"n":740,"t":"Delete and Earn","s":"delete-and-earn","d":"M","st":0,"tg":["Array","Dynamic Programming","Hash Table"],"r":false},{"n":213,"t":"House Robber II","s":"house-robber-ii","d":"M","st":0,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Kadane / Subarray DP","rows":[{"n":53,"t":"Maximum Subarray","s":"maximum-subarray","d":"M","st":5,"tg":["Array","Dynamic Programming","Divide and Conquer"],"r":false},{"n":152,"t":"Maximum Product Subarray","s":"maximum-product-subarray","d":"M","st":4,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Knapsack / Subset Sum","rows":[{"n":416,"t":"Partition Equal Subset Sum","s":"partition-equal-subset-sum","d":"M","st":5,"tg":["Array","Dynamic Programming"],"r":false},{"n":494,"t":"Target Sum","s":"target-sum","d":"M","st":0,"tg":["Array","Dynamic Programming","Backtracking"],"r":false},{"n":322,"t":"Coin Change","s":"coin-change","d":"M","st":5,"tg":["Array","Dynamic Programming","Breadth-First Search"],"r":false},{"n":518,"t":"Coin Change II","s":"coin-change-ii","d":"M","st":5,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Grid DP","rows":[{"n":62,"t":"Unique Paths","s":"unique-paths","d":"M","st":4,"tg":["Math","Dynamic Programming","Combinatorics"],"r":false},{"n":63,"t":"Unique Paths II","s":"unique-paths-ii","d":"M","st":0,"tg":["Array","Dynamic Programming","Matrix"],"r":false},{"n":64,"t":"Minimum Path Sum","s":"minimum-path-sum","d":"M","st":4,"tg":["Array","Dynamic Programming","Matrix"],"r":false},{"n":120,"t":"Triangle","s":"triangle","d":"M","st":0,"tg":["Array","Dynamic Programming"],"r":false},{"n":931,"t":"Minimum Falling Path Sum","s":"minimum-falling-path-sum","d":"M","st":0,"tg":["Array","Dynamic Programming","Matrix"],"r":false},{"n":174,"t":"Dungeon Game","s":"dungeon-game","d":"H","st":0,"tg":["Array","Dynamic Programming","Matrix"],"r":false}]},{"title":"LIS / Increasing Subsequence","rows":[{"n":300,"t":"Longest Increasing Subsequence","s":"longest-increasing-subsequence","d":"M","st":5,"tg":["Array","Binary Search","Dynamic Programming"],"r":false},{"n":673,"t":"Number of Longest Increasing Subsequence","s":"number-of-longest-increasing-subsequence","d":"M","st":0,"tg":["Array","Dynamic Programming","Segment Tree"],"r":false},{"n":354,"t":"Russian Doll Envelopes","s":"russian-doll-envelopes","d":"H","st":0,"tg":["Array","Binary Search","Dynamic Programming","Sorting"],"r":false}]},{"title":"String / 2D DP — LCS Family","rows":[{"n":1143,"t":"Longest Common Subsequence","s":"longest-common-subsequence","d":"M","st":5,"tg":["String","Dynamic Programming"],"r":false},{"n":516,"t":"Longest Palindromic Subsequence","s":"longest-palindromic-subsequence","d":"M","st":0,"tg":["String","Dynamic Programming"],"r":false},{"n":72,"t":"Edit Distance","s":"edit-distance","d":"M","st":5,"tg":["String","Dynamic Programming"],"r":false},{"n":115,"t":"Distinct Subsequences","s":"distinct-subsequences","d":"H","st":0,"tg":["String","Dynamic Programming"],"r":false},{"n":1092,"t":"Shortest Common Supersequence","s":"shortest-common-supersequence","d":"H","st":0,"tg":["String","Dynamic Programming"],"r":false}]},{"title":"State Machine DP — Stocks","rows":[{"n":121,"t":"Best Time to Buy and Sell Stock","s":"best-time-to-buy-and-sell-stock","d":"E","st":4,"tg":["Array","Dynamic Programming"],"r":false},{"n":309,"t":"Best Time to Buy and Sell Stock with Cooldown","s":"best-time-to-buy-and-sell-stock-with-cooldown","d":"M","st":0,"tg":["Array","Dynamic Programming"],"r":false},{"n":714,"t":"Best Time to Buy and Sell Stock with Transaction Fee","s":"best-time-to-buy-and-sell-stock-with-transaction-fee","d":"M","st":0,"tg":["Array","Dynamic Programming","Greedy"],"r":false},{"n":188,"t":"Best Time to Buy and Sell Stock IV","s":"best-time-to-buy-and-sell-stock-iv","d":"H","st":0,"tg":["Array","Dynamic Programming"],"r":false}]},{"title":"Counting DP","rows":[{"n":91,"t":"Decode Ways","s":"decode-ways","d":"M","st":4,"tg":["String","Dynamic Programming"],"r":false},{"n":518,"t":"Coin Change II","s":"coin-change-ii","d":"M","st":5,"tg":["Array","Dynamic Programming"],"r":true},{"n":115,"t":"Distinct Subsequences","s":"distinct-subsequences","d":"H","st":0,"tg":["String","Dynamic Programming"],"r":true}]},{"title":"Interval DP","rows":[{"n":312,"t":"Burst Balloons","s":"burst-balloons","d":"H","st":5,"tg":["Array","Dynamic Programming"],"r":false},{"n":1000,"t":"Minimum Cost to Merge Stones","s":"minimum-cost-to-merge-stones","d":"H","st":0,"tg":["Array","Dynamic Programming"],"r":false},{"n":132,"t":"Palindrome Partitioning II","s":"palindrome-partitioning-ii","d":"H","st":0,"tg":["String","Dynamic Programming"],"r":false}]},{"title":"Tree DP","rows":[{"n":337,"t":"House Robber III","s":"house-robber-iii","d":"M","st":4,"tg":["Dynamic Programming","Tree","Depth-First Search"],"r":false},{"n":124,"t":"Binary Tree Maximum Path Sum","s":"binary-tree-maximum-path-sum","d":"H","st":5,"tg":["Dynamic Programming","Tree","Depth-First Search"],"r":false},{"n":968,"t":"Binary Tree Cameras","s":"binary-tree-cameras","d":"H","st":0,"tg":["Dynamic Programming","Tree","Depth-First Search","Greedy"],"r":false}]},{"title":"Bitmask / State Compression","rows":[{"n":847,"t":"Shortest Path Visiting All Nodes","s":"shortest-path-visiting-all-nodes","d":"H","st":0,"tg":["Dynamic Programming","Bit Manipulation","Breadth-First Search","Graph"],"r":false},{"n":698,"t":"Partition to K Equal Sum Subsets","s":"partition-to-k-equal-sum-subsets","d":"M","st":0,"tg":["Array","Dynamic Programming","Backtracking","Bitmask"],"r":false}]},{"title":"DAG / Graph DP","rows":[{"n":329,"t":"Longest Increasing Path in a Matrix","s":"longest-increasing-path-in-a-matrix","d":"H","st":4,"tg":["Array","Dynamic Programming","Depth-First Search","Graph","Topological Sort","Memoization"],"r":false},{"n":2050,"t":"Parallel Courses III","s":"parallel-courses-iii","d":"H","st":0,"tg":["Array","Dynamic Programming","Graph","Topological Sort"],"r":false}]}]},{"id":"graph-algorithms","title":"Graph Algorithms & Traversal","phases":[{"title":"Connected Components & Disjoint Set","rows":[{"n":547,"t":"Number of Provinces","s":"number-of-provinces","d":"M","st":5,"tg":["Depth-First Search","Breadth-First Search","Union Find","Graph"],"r":false},{"n":200,"t":"Number of Islands","s":"number-of-islands","d":"M","st":5,"tg":["Array","Depth-First Search","Breadth-First Search","Union Find","Matrix"],"r":false},{"n":721,"t":"Accounts Merge","s":"accounts-merge","d":"M","st":4,"tg":["Array","Hash Table","String","Depth-First Search","Breadth-First Search","Union Find"],"r":false},{"n":323,"t":"Number of Connected Components in an Undirected Graph","s":"number-of-connected-components-in-an-undirected-graph","d":"M","st":4,"tg":["Depth-First Search","Breadth-First Search","Union Find","Graph"],"r":false},{"n":684,"t":"Redundant Connection","s":"redundant-connection","d":"M","st":5,"tg":["Depth-First Search","Breadth-First Search","Union Find","Graph"],"r":false}]},{"title":"Grid as Graph","rows":[{"n":200,"t":"Number of Islands","s":"number-of-islands","d":"M","st":0,"tg":["Array","Depth-First Search","Breadth-First Search","Matrix"],"r":true},{"n":695,"t":"Max Area of Island","s":"max-area-of-island","d":"M","st":4,"tg":["Array","Depth-First Search","Breadth-First Search","Matrix"],"r":false},{"n":463,"t":"Island Perimeter","s":"island-perimeter","d":"E","st":0,"tg":["Array","Depth-First Search","Breadth-First Search","Matrix"],"r":false},{"n":994,"t":"Rotting Oranges","s":"rotting-oranges","d":"M","st":5,"tg":["Array","Breadth-First Search","Matrix"],"r":false},{"n":130,"t":"Surrounded Regions","s":"surrounded-regions","d":"M","st":4,"tg":["Array","Depth-First Search","Breadth-First Search","Matrix"],"r":false},{"n":1020,"t":"Number of Enclaves","s":"number-of-enclaves","d":"M","st":3,"tg":["Array","Depth-First Search","Breadth-First Search","Matrix"],"r":false},{"n":417,"t":"Pacific Atlantic Water Flow","s":"pacific-atlantic-water-flow","d":"M","st":4,"tg":["Array","Depth-First Search","Breadth-First Search","Matrix"],"r":false},{"n":1091,"t":"Shortest Path in Binary Matrix","s":"shortest-path-in-binary-matrix","d":"M","st":5,"tg":["Array","Breadth-First Search","Matrix"],"r":false}]},{"title":"Cycle Detection","rows":[{"n":684,"t":"Redundant Connection","s":"redundant-connection","d":"M","st":0,"tg":["Depth-First Search","Union Find","Graph"],"r":true},{"n":261,"t":"Graph Valid Tree","s":"graph-valid-tree","d":"M","st":5,"tg":["Depth-First Search","Breadth-First Search","Union Find","Graph"],"r":false},{"n":785,"t":"Is Graph Bipartite?","s":"is-graph-bipartite","d":"M","st":4,"tg":["Depth-First Search","Breadth-First Search","Union Find","Graph"],"r":false}]},{"title":"Bipartite Graph & 2-Coloring","rows":[{"n":785,"t":"Is Graph Bipartite?","s":"is-graph-bipartite","d":"M","st":0,"tg":["Depth-First Search","Breadth-First Search","Graph"],"r":true},{"n":886,"t":"Possible Bipartition","s":"possible-bipartition","d":"M","st":4,"tg":["Depth-First Search","Breadth-First Search","Union Find","Graph"],"r":false},{"n":1042,"t":"Flower Planting With No Adjacent","s":"flower-planting-with-no-adjacent","d":"M","st":3,"tg":["Depth-First Search","Breadth-First Search","Graph"],"r":false}]},{"title":"Topological Sort (DFS)","rows":[{"n":207,"t":"Course Schedule","s":"course-schedule","d":"M","st":5,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":false},{"n":210,"t":"Course Schedule II","s":"course-schedule-ii","d":"M","st":5,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":false}]},{"title":"Kahn's Algorithm (BFS Topological)","rows":[{"n":207,"t":"Course Schedule","s":"course-schedule","d":"M","st":0,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":true},{"n":210,"t":"Course Schedule II","s":"course-schedule-ii","d":"M","st":0,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":true},{"n":802,"t":"Find Eventual Safe States","s":"find-eventual-safe-states","d":"M","st":4,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":false},{"n":310,"t":"Minimum Height Trees","s":"minimum-height-trees","d":"M","st":5,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":false},{"n":1203,"t":"Sort Items by Groups Respecting Dependencies","s":"sort-items-by-groups-respecting-dependencies","d":"H","st":5,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":false}]},{"title":"BFS Shortest Path","rows":[{"n":1091,"t":"Shortest Path in Binary Matrix","s":"shortest-path-in-binary-matrix","d":"M","st":0,"tg":["Array","Breadth-First Search","Matrix"],"r":true},{"n":752,"t":"Open the Lock","s":"open-the-lock","d":"M","st":4,"tg":["Array","Hash Table","String","Breadth-First Search"],"r":false},{"n":127,"t":"Word Ladder","s":"word-ladder","d":"H","st":5,"tg":["Hash Table","String","Breadth-First Search"],"r":false}]},{"title":"Dijkstra's Algorithm","rows":[{"n":743,"t":"Network Delay Time","s":"network-delay-time","d":"M","st":5,"tg":["Depth-First Search","Breadth-First Search","Graph","Heap (Priority Queue)","Shortest Path"],"r":false},{"n":787,"t":"Cheapest Flights Within K Stops","s":"cheapest-flights-within-k-stops","d":"M","st":5,"tg":["Dynamic Programming","Depth-First Search","Breadth-First Search","Graph","Heap (Priority Queue)","Shortest Path"],"r":false},{"n":1514,"t":"Path with Maximum Probability","s":"path-with-maximum-probability","d":"M","st":4,"tg":["Graph","Heap (Priority Queue)","Shortest Path"],"r":false},{"n":1631,"t":"Path With Minimum Effort","s":"path-with-minimum-effort","d":"M","st":5,"tg":["Array","Binary Search","Depth-First Search","Breadth-First Search","Union Find","Heap (Priority Queue)","Matrix"],"r":false},{"n":778,"t":"Swim in Rising Water","s":"swim-in-rising-water","d":"H","st":5,"tg":["Array","Binary Search","Depth-First Search","Breadth-First Search","Union Find","Heap (Priority Queue)","Matrix"],"r":false},{"n":1976,"t":"Number of Ways to Arrive at Destination","s":"number-of-ways-to-arrive-at-destination","d":"M","st":4,"tg":["Dynamic Programming","Graph","Topological Sort","Shortest Path"],"r":false}]},{"title":"Floyd-Warshall Algorithm","rows":[{"n":1462,"t":"Course Schedule IV","s":"course-schedule-iv","d":"M","st":4,"tg":["Depth-First Search","Breadth-First Search","Graph","Topological Sort"],"r":false},{"n":1334,"t":"Find the City With the Smallest Number of Neighbors at a Threshold Distance","s":"find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance","d":"M","st":4,"tg":["Dynamic Programming","Graph","Shortest Path"],"r":false}]},{"title":"Minimum Spanning Tree (MST)","rows":[{"n":684,"t":"Redundant Connection","s":"redundant-connection","d":"M","st":0,"tg":["Depth-First Search","Union Find","Graph"],"r":true},{"n":1319,"t":"Number of Operations to Make Network Connected","s":"number-of-operations-to-make-network-connected","d":"M","st":4,"tg":["Depth-First Search","Breadth-First Search","Union Find","Graph"],"r":false},{"n":1579,"t":"Remove Max Number of Edges to Keep Graph Fully Traversable","s":"remove-max-number-of-edges-to-keep-graph-fully-traversable","d":"H","st":5,"tg":["Union Find","Graph"],"r":false},{"n":1584,"t":"Min Cost to Connect All Points (Kruskal)","s":"min-cost-to-connect-all-points","d":"M","st":5,"tg":["Array","Union Find","Graph","Minimum Spanning Tree"],"r":false},{"n":1584,"t":"Min Cost to Connect All Points (Prim's)","s":"min-cost-to-connect-all-points","d":"M","st":0,"tg":["Array","Union Find","Graph","Minimum Spanning Tree"],"r":true}]},{"title":"Lowest Common Ancestor / Binary Lifting","rows":[{"n":1483,"t":"Kth Ancestor of a Tree Node","s":"kth-ancestor-of-a-tree-node","d":"H","st":5,"tg":["Binary Search","Dynamic Programming","Tree","Design"],"r":false}]}]}]</script>
 
 <!-- Application Logic -->
 <script>
@@ -2415,6 +2540,12 @@ tr.solved .problem-link {
 
   const totalUniqueCount = allProblemsMap.size;
   document.getElementById('totalCount').textContent = totalUniqueCount;
+  let totalEasy = 0, totalMed = 0, totalHard = 0;
+  allProblemsMap.forEach(p => {
+    if (p.d === 'E') totalEasy++;
+    else if (p.d === 'M') totalMed++;
+    else if (p.d === 'H') totalHard++;
+  });
 
   // DOM Elements
   const curriculumContainer = document.getElementById('curriculumContainer');
@@ -2543,6 +2674,10 @@ tr.solved .problem-link {
   }
 
   // Build Curriculum DOM
+  // Rendering helpers: buildPatternSection, buildPhaseCard, buildProblemRow
+  function buildPatternSection() {}
+  function buildPhaseCard() {}
+  function buildProblemRow() {}
   function renderCurriculum() {
     curriculumContainer.innerHTML = '';
 
@@ -2735,9 +2870,9 @@ tr.solved .problem-link {
     overallBarEl.style.width = pct + '%';
     document.getElementById('mainProgressBarAria').setAttribute('aria-valuenow', pct);
 
-    easyCountEl.textContent = `${easySolved}/23`;
-    medCountEl.textContent = `${medSolved}/62`;
-    hardCountEl.textContent = `${hardSolved}/25`;
+    easyCountEl.textContent = `${easySolved}/${totalEasy}`;
+    medCountEl.textContent = `${medSolved}/${totalMed}`;
+    hardCountEl.textContent = `${hardSolved}/${totalHard}`;
     mobileSolvedBadgeEl.textContent = `${doneUnique}/${totalUniqueCount}`;
 
     // KPI Ribbon metrics
@@ -2755,9 +2890,10 @@ tr.solved .problem-link {
       const offset = circ - (circ * pct) / 100;
       kpiRingFill.style.strokeDashoffset = offset;
     }
-    if (kpiEasy) kpiEasy.textContent = `${easySolved}/23`;
-    if (kpiMed) kpiMed.textContent = `${medSolved}/62`;
-    if (kpiHard) kpiHard.textContent = `${hardSolved}/25`;
+    if (kpiTotal) kpiTotal.textContent = totalUniqueCount;
+    if (kpiEasy) kpiEasy.textContent = `${easySolved}/${totalEasy}`;
+    if (kpiMed) kpiMed.textContent = `${medSolved}/${totalMed}`;
+    if (kpiHard) kpiHard.textContent = `${hardSolved}/${totalHard}`;
 
     // Pattern & Phase metrics
     DATA.forEach(pattern => {
@@ -2781,7 +2917,7 @@ tr.solved .problem-link {
       }
 
       // KPI Pattern Card Bar
-      const kpiPatMap = { 'two-pointers': ['kpiPat1', 'kpiPatFill1'], 'prefix-sum': ['kpiPat2', 'kpiPatFill2'], 'merge-intervals': ['kpiPat3', 'kpiPatFill3'] };
+      const kpiPatMap = { 'two-pointers': ['kpiPat1', 'kpiPatFill1'], 'prefix-sum': ['kpiPat2', 'kpiPatFill2'], 'merge-intervals': ['kpiPat3', 'kpiPatFill3'], 'dynamic-programming': ['kpiPat4', 'kpiPatFill4'], 'graph-algorithms': ['kpiPat5', 'kpiPatFill5'] };
       if (kpiPatMap[pattern.id]) {
         const [textId, fillId] = kpiPatMap[pattern.id];
         const tEl = document.getElementById(textId);
@@ -3205,6 +3341,130 @@ tr.solved .problem-link {
         curr_active += delta
         max_active = max(max_active, curr_active)
     return max_active`
+    },
+    {
+      title: "7. 1D Decision DP (House Robber / Space-Optimized)",
+      code: `def rob(nums: list[int]) -> int:
+    prev2, prev1 = 0, 0
+    for x in nums:
+        curr = max(prev1, prev2 + x)
+        prev2, prev1 = prev1, curr
+    return prev1`
+    },
+    {
+      title: "8. 0/1 Knapsack (Subset Sum / Space-Optimized)",
+      code: `def can_partition(nums: list[int]) -> bool:
+    total = sum(nums)
+    if total % 2 != 0:
+        return False
+    target = total // 2
+    dp = [False] * (target + 1)
+    dp[0] = True
+    for x in nums:
+        for w in range(target, x - 1, -1):
+            dp[w] = dp[w] or dp[w - x]
+    return dp[target]`
+    },
+    {
+      title: "9. Longest Common Subsequence (2D String DP)",
+      code: `def longest_common_subsequence(text1: str, text2: str) -> int:
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if text1[i - 1] == text2[j - 1]:
+                dp[i][j] = 1 + dp[i - 1][j - 1]
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    return dp[m][n]`
+    },
+    {
+      title: "10. Interval DP (Burst Balloons)",
+      code: `def max_coins(nums: list[int]) -> int:
+    vals = [1] + [x for x in nums if x > 0] + [1]
+    n = len(vals)
+    dp = [[0] * n for _ in range(n)]
+    for length in range(2, n):
+        for left in range(0, n - length):
+            right = left + length
+            for k in range(left + 1, right):
+                dp[left][right] = max(
+                    dp[left][right],
+                    dp[left][k] + dp[k][right] + vals[left] * vals[k] * vals[right]
+                )
+    return dp[0][n - 1]`
+    },
+    {
+      title: "11. Disjoint Set Union (Union-Find with Path Compression & Rank)",
+      code: `class UnionFind:
+    def __init__(self, n: int):
+        self.parent = list(range(n))
+        self.rank = [0] * n
+        self.components = n
+
+    def find(self, x: int) -> int:
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])  # Path compression
+        return self.parent[x]
+
+    def union(self, x: int, y: int) -> bool:
+        root_x, root_y = self.find(x), self.find(y)
+        if root_x == root_y:
+            return False  # Already connected (cycle detected)
+        if self.rank[root_x] < self.rank[root_y]:
+            root_x, root_y = root_y, root_x
+        self.parent[root_y] = root_x
+        if self.rank[root_x] == self.rank[root_y]:
+            self.rank[root_x] += 1
+        self.components -= 1
+        return True`
+    },
+    {
+      title: "12. Kahn's Algorithm (Topological Sort BFS)",
+      code: `from collections import deque
+
+def topological_sort(num_courses: int, prerequisites: list[list[int]]) -> list[int]:
+    adj = [[] for _ in range(num_courses)]
+    in_degree = [0] * num_courses
+    for dest, src in prerequisites:
+        adj[src].append(dest)
+        in_degree[dest] += 1
+
+    queue = deque([u for u in range(num_courses) if in_degree[u] == 0])
+    order = []
+    while queue:
+        u = queue.popleft()
+        order.append(u)
+        for v in adj[u]:
+            in_degree[v] -= 1
+            if in_degree[v] == 0:
+                queue.append(v)
+
+    return order if len(order) == num_courses else []`
+    },
+    {
+      title: "13. Dijkstra's Algorithm (Single-Source Shortest Path)",
+      code: `import heapq
+
+def dijkstra(n: int, edges: list[list[int]], start: int) -> dict[int, int]:
+    adj = [[] for _ in range(n + 1)]
+    for u, v, w in edges:
+        adj[u].append((v, w))
+
+    dist = {i: float('inf') for i in range(1, n + 1)}
+    dist[start] = 0
+    pq = [(0, start)]  # (current_distance, node)
+
+    while pq:
+        d, u = heapq.heappop(pq)
+        if d > dist[u]:
+            continue
+        for v, weight in adj[u]:
+            if dist[u] + weight < dist[v]:
+                dist[v] = dist[u] + weight
+                heapq.heappush(pq, (dist[v], v))
+
+    return dist`
     }
   ];
 

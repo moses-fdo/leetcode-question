@@ -1,18 +1,18 @@
 <div align="center">
 
 # 🧩 DSA Pattern Mastery Roadmap
-### Two Pointers & Sliding Window • Prefix Sum • Merge Intervals
+### Two Pointers & Sliding Window • Prefix Sum • Merge Intervals • Dynamic Programming • Graph Algorithms
 
 <p align="center">
   <b>A comprehensive, phase-by-phase LeetCode roadmap engineered to systematically build pattern recognition from core fundamentals to advanced FAANG capstones.</b>
 </p>
 
 <p align="center">
-  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Total_Entries-133-3b82f6?style=for-the-badge&logo=leetcode&logoColor=white" alt="Total Entries"></a>
-  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Unique_Problems-110-8b5cf6?style=for-the-badge" alt="Unique Problems"></a>
-  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Easy-23-10b981?style=for-the-badge" alt="Easy Problems"></a>
-  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Medium-75-f59e0b?style=for-the-badge" alt="Medium Problems"></a>
-  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Hard-35-ef4444?style=for-the-badge" alt="Hard Problems"></a>
+  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Total_Entries-217-3b82f6?style=for-the-badge&logo=leetcode&logoColor=white" alt="Total Entries"></a>
+  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Unique_Problems-184-8b5cf6?style=for-the-badge" alt="Unique Problems"></a>
+  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Easy-26-10b981?style=for-the-badge" alt="Easy Problems"></a>
+  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Medium-136-f59e0b?style=for-the-badge" alt="Medium Problems"></a>
+  <a href="#at-a-glance"><img src="https://img.shields.io/badge/Hard-55-ef4444?style=for-the-badge" alt="Hard Problems"></a>
   <a href="https://moses-fdo.github.io/leetcode-question/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Web_Tracker-Live_App-06b6d4?style=for-the-badge&logo=safari&logoColor=white" alt="Web Tracker"></a>
 </p>
 
@@ -43,6 +43,8 @@
 - [🔹 Pattern 1: Two Pointers & Sliding Window (55 Problems)](#two-pointers)
 - [🔸 Pattern 2: Prefix Sum (49 Problems)](#prefix-sum)
 - [🔷 Pattern 3: Merge Intervals (29 Problems)](#merge-intervals)
+- [🟣 Pattern 4: Dynamic Programming (41 Problems)](#dynamic-programming)
+- [🌐 Pattern 5: Graph Algorithms & Traversal (43 Problems)](#graph-algorithms)
 
 ---
 
@@ -55,9 +57,11 @@
 | **🔹 Two Pointers & Sliding Window** | Opposite, Fast & Slow, Fixed/Variable Window, Monotonic Deque | 9 | 55 | 12 | 31 | 12 | 49 | [Jump to Pattern ➔](#two-pointers) |
 | **🔸 Prefix Sum** | Hashmap, Modulo, 2D Matrix, Difference Array, Binary Search | 11 | 49 | 8 | 29 | 12 | 40 | [Jump to Pattern ➔](#prefix-sum) |
 | **🔷 Merge Intervals** | Overlaps, Greedy Intervals, Sweep Line, Heap Scheduling | 8 | 29 | 3 | 15 | 11 | 26 | [Jump to Pattern ➔](#merge-intervals) |
-| **⭐ Total** | **Complete Pattern Mastery** | **28** | **133** | **23** | **75** | **35** | **110** | — |
+| **🟣 Dynamic Programming** | 1D Take/Skip, Kadane, Knapsack, Grid, LIS, LCS, Stocks, Interval, Tree, Bitmask, DAG | 12 | 41 | 2 | 25 | 14 | 39 | [Jump to Pattern ➔](#dynamic-programming) |
+| **🌐 Graph Algorithms & Traversal** | BFS/DFS, Union-Find, Grid, Bipartite, Topological/Kahn, Dijkstra, Floyd-Warshall, MST, Binary Lifting | 11 | 43 | 1 | 36 | 6 | 35 | [Jump to Pattern ➔](#graph-algorithms) |
+| **⭐ Total** | **Complete Pattern Mastery** | **51** | **217** | **26** | **136** | **55** | **184** | — |
 
-> 💡 *Note on Spaced Repetition:* High-yield problems intentionally re-appear in multiple phases under different conceptual angles. That is why there are 133 total entries covering 110 unique LeetCode problems (23 Easy, 62 Medium, 25 Hard).
+> 💡 *Note on Spaced Repetition:* High-yield problems intentionally re-appear in multiple phases under different conceptual angles. That is why there are 217 total entries covering 184 unique LeetCode problems (26 Easy, 115 Medium, 43 Hard).
 
 ---
 
@@ -225,6 +229,174 @@ def max_concurrent_events(intervals: list[list[int]]) -> int:
 ```
 
 </details>
+
+<a id="graph-algorithms"></a>
+
+## 🌐 Graph Algorithms & Traversal
+
+`43 problems` · 🟢 1 Easy · 🟡 36 Medium · 🔴 6 Hard · 35 Unique
+
+<div align="center">
+
+**Quick Jump to Phase:**  
+[1. Connected Components](#ga-p1) • [2. Grid as Graph](#ga-p2) • [3. Cycle Detection](#ga-p3) • [4. Bipartite Graph](#ga-p4) • [5. Topological Sort](#ga-p5)  
+[6. Kahn's Algorithm](#ga-p6) • [7. BFS Shortest Path](#ga-p7) • [8. Dijkstra's Algorithm](#ga-p8) • [9. Floyd-Warshall](#ga-p9) • [10. Minimum Spanning Tree](#ga-p10) • [11. Binary Lifting](#ga-p11)  
+
+</div>
+
+<a id="ga-p1"></a>
+<details open>
+<summary><b>Phase 1 · Connected Components & Disjoint Set</b> &nbsp;<sub>(5 problems · 🟡 5 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `547` | <a href="https://leetcode.com/problems/number-of-provinces/" target="_blank" rel="noopener noreferrer"><b>Number of Provinces</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `DFS` `BFS` `Union Find` `Graph` | Fundamental disjoint set / connected component count |
+| [ ] | `200` | <a href="https://leetcode.com/problems/number-of-islands/" target="_blank" rel="noopener noreferrer"><b>Number of Islands</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `DFS` `BFS` `Matrix` | Matrix connected components with boundary sink traversal |
+| [ ] | `721` | <a href="https://leetcode.com/problems/accounts-merge/" target="_blank" rel="noopener noreferrer"><b>Accounts Merge</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Hash Table` `Union Find` `String` | Union-Find on email identifiers mapping to canonical owner |
+| [ ] | `323` | <a href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/" target="_blank" rel="noopener noreferrer"><b>Number of Connected Components...</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `DFS` `BFS` `Union Find` `Graph` | Direct component count decrement upon successful union |
+| [ ] | `684` | <a href="https://leetcode.com/problems/redundant-connection/" target="_blank" rel="noopener noreferrer"><b>Redundant Connection</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `DFS` `BFS` `Union Find` `Graph` | First edge connecting two nodes already in the same root |
+
+</details>
+
+<a id="ga-p2"></a>
+<details open>
+<summary><b>Phase 2 · Grid as Graph</b> &nbsp;<sub>(8 problems · 🟢 1 Easy · 🟡 7 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `200` | <a href="https://leetcode.com/problems/number-of-islands/" target="_blank" rel="noopener noreferrer"><b>Number of Islands</b></a> | 🟡 Medium | — | `Array` `DFS` `BFS` `Matrix` | 🔁 Spaced Repetition (from Connected Components) |
+| [ ] | `695` | <a href="https://leetcode.com/problems/max-area-of-island/" target="_blank" rel="noopener noreferrer"><b>Max Area of Island</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `DFS` `BFS` `Matrix` | Island component size accumulator with visited marking |
+| [ ] | `463` | <a href="https://leetcode.com/problems/island-perimeter/" target="_blank" rel="noopener noreferrer"><b>Island Perimeter</b></a> | 🟢 Easy | ⭐ Core | `Array` `Matrix` | Edge counting or neighbor subtraction: $4 \times land - 2 \times shared$ |
+| [ ] | `994` | <a href="https://leetcode.com/problems/rotting-oranges/" target="_blank" rel="noopener noreferrer"><b>Rotting Oranges</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `BFS` `Matrix` | Multi-source BFS tracking minute progression level by level |
+| [ ] | `130` | <a href="https://leetcode.com/problems/surrounded-regions/" target="_blank" rel="noopener noreferrer"><b>Surrounded Regions</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `DFS` `BFS` `Matrix` | Reverse boundary flooding: protect boundary-connected 'O's first |
+| [ ] | `1020` | <a href="https://leetcode.com/problems/number-of-enclaves/" target="_blank" rel="noopener noreferrer"><b>Number of Enclaves</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `Array` `DFS` `BFS` `Matrix` | Sink boundary land cells, count remaining unreachable land |
+| [ ] | `417` | <a href="https://leetcode.com/problems/pacific-atlantic-water-flow/" target="_blank" rel="noopener noreferrer"><b>Pacific Atlantic Water Flow</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `DFS` `BFS` `Matrix` | Dual BFS/DFS from Pacific and Atlantic coasts inward |
+| [ ] | `1091` | <a href="https://leetcode.com/problems/shortest-path-in-binary-matrix/" target="_blank" rel="noopener noreferrer"><b>Shortest Path in Binary Matrix</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `BFS` `Matrix` | 8-directional unweighted shortest path via level-order BFS |
+
+</details>
+
+<a id="ga-p3"></a>
+<details open>
+<summary><b>Phase 3 · Cycle Detection</b> &nbsp;<sub>(3 problems · 🟡 3 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `684` | <a href="https://leetcode.com/problems/redundant-connection/" target="_blank" rel="noopener noreferrer"><b>Redundant Connection</b></a> | 🟡 Medium | — | `DFS` `Union Find` `Graph` | 🔁 Spaced Repetition (from Disjoint Set) |
+| [ ] | `261` | <a href="https://leetcode.com/problems/graph-valid-tree/" target="_blank" rel="noopener noreferrer"><b>Graph Valid Tree</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `DFS` `BFS` `Union Find` `Graph` | Tree invariants: exactly $n-1$ edges AND fully connected (0 cycles) |
+| [ ] | `785` | <a href="https://leetcode.com/problems/is-graph-bipartite/" target="_blank" rel="noopener noreferrer"><b>Is Graph Bipartite?</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `DFS` `BFS` `Union Find` `Graph` | Odd-length cycle detection via 2-color conflict check |
+
+</details>
+
+<a id="ga-p4"></a>
+<details open>
+<summary><b>Phase 4 · Bipartite Graph & 2-Coloring</b> &nbsp;<sub>(3 problems · 🟡 3 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `785` | <a href="https://leetcode.com/problems/is-graph-bipartite/" target="_blank" rel="noopener noreferrer"><b>Is Graph Bipartite?</b></a> | 🟡 Medium | — | `DFS` `BFS` `Graph` | 🔁 Spaced Repetition (from Cycle Detection) |
+| [ ] | `886` | <a href="https://leetcode.com/problems/possible-bipartition/" target="_blank" rel="noopener noreferrer"><b>Possible Bipartition</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `DFS` `BFS` `Union Find` `Graph` | Dislike edges form graph: verify 2-colorability without conflicts |
+| [ ] | `1042` | <a href="https://leetcode.com/problems/flower-planting-with-no-adjacent/" target="_blank" rel="noopener noreferrer"><b>Flower Planting With No Adjacent</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `DFS` `BFS` `Graph` | Greedy 4-coloring on degree $le 3$ planar garden graph |
+
+</details>
+
+<a id="ga-p5"></a>
+<details open>
+<summary><b>Phase 5 · Topological Sort (DFS)</b> &nbsp;<sub>(2 problems · 🟡 2 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `207` | <a href="https://leetcode.com/problems/course-schedule/" target="_blank" rel="noopener noreferrer"><b>Course Schedule</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `DFS` `Graph` `Topological Sort` | 3-color DFS cycle check: $0 = unvisited$, $1 = visiting$, $2 = visited$ |
+| [ ] | `210` | <a href="https://leetcode.com/problems/course-schedule-ii/" target="_blank" rel="noopener noreferrer"><b>Course Schedule II</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `DFS` `Graph` `Topological Sort` | Reverse post-order DFS traversal generating valid order |
+
+</details>
+
+<a id="ga-p6"></a>
+<details open>
+<summary><b>Phase 6 · Kahn's Algorithm (BFS Topological)</b> &nbsp;<sub>(5 problems · 🟡 4 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `207` | <a href="https://leetcode.com/problems/course-schedule/" target="_blank" rel="noopener noreferrer"><b>Course Schedule</b></a> | 🟡 Medium | — | `BFS` `Graph` `Topological Sort` | 🔁 Spaced Repetition (In-degree peeling BFS) |
+| [ ] | `210` | <a href="https://leetcode.com/problems/course-schedule-ii/" target="_blank" rel="noopener noreferrer"><b>Course Schedule II</b></a> | 🟡 Medium | — | `BFS` `Graph` `Topological Sort` | 🔁 Spaced Repetition (Queue pop ordering) |
+| [ ] | `802` | <a href="https://leetcode.com/problems/find-eventual-safe-states/" target="_blank" rel="noopener noreferrer"><b>Find Eventual Safe States</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `DFS` `Graph` `Topological Sort` | Reverse edges + Kahn's algorithm peeling out-degree 0 nodes |
+| [ ] | `310` | <a href="https://leetcode.com/problems/minimum-height-trees/" target="_blank" rel="noopener noreferrer"><b>Minimum Height Trees</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `BFS` `Graph` `Topological Sort` | Kahn-style leaf peeling until 1 or 2 tree centroids remain |
+| [ ] | `1203` | <a href="https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/" target="_blank" rel="noopener noreferrer"><b>Sort Items by Groups Respecting Dependencies</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `DFS` `BFS` `Graph` `Topological Sort` | Two-level topological sort: sort group DAG, then item DAGs |
+
+</details>
+
+<a id="ga-p7"></a>
+<details open>
+<summary><b>Phase 7 · BFS Shortest Path</b> &nbsp;<sub>(3 problems · 🟡 2 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `1091` | <a href="https://leetcode.com/problems/shortest-path-in-binary-matrix/" target="_blank" rel="noopener noreferrer"><b>Shortest Path in Binary Matrix</b></a> | 🟡 Medium | — | `Array` `BFS` `Matrix` | 🔁 Spaced Repetition (from Grid as Graph) |
+| [ ] | `752` | <a href="https://leetcode.com/problems/open-the-lock/" target="_blank" rel="noopener noreferrer"><b>Open the Lock</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Hash Table` `String` `BFS` | State-space BFS graph where each 4-digit code is a node |
+| [ ] | `127` | <a href="https://leetcode.com/problems/word-ladder/" target="_blank" rel="noopener noreferrer"><b>Word Ladder</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Hash Table` `String` `BFS` | Bidirectional BFS with wildcard intermediate map ($hit \to h*t$) |
+
+</details>
+
+<a id="ga-p8"></a>
+<details open>
+<summary><b>Phase 8 · Dijkstra's Algorithm</b> &nbsp;<sub>(6 problems · 🟡 5 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `743` | <a href="https://leetcode.com/problems/network-delay-time/" target="_blank" rel="noopener noreferrer"><b>Network Delay Time</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Graph` `Heap (Priority Queue)` `Shortest Path` | Canonical Dijkstra single-source shortest path template |
+| [ ] | `787` | <a href="https://leetcode.com/problems/cheapest-flights-within-k-stops/" target="_blank" rel="noopener noreferrer"><b>Cheapest Flights Within K Stops</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Dynamic Programming` `Graph` `Shortest Path` | Modified Dijkstra / Bellman-Ford tracking distance with step count |
+| [ ] | `1514` | <a href="https://leetcode.com/problems/path-with-maximum-probability/" target="_blank" rel="noopener noreferrer"><b>Path with Maximum Probability</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Graph` `Heap (Priority Queue)` `Shortest Path` | Max-heap Dijkstra: multiply edge probabilities on relaxation |
+| [ ] | `1631` | <a href="https://leetcode.com/problems/path-with-minimum-effort/" target="_blank" rel="noopener noreferrer"><b>Path With Minimum Effort</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Matrix` `Heap (Priority Queue)` `Shortest Path` | Minimax Dijkstra: $dist[v] = min(dist[v], max(dist[u], diff))$ |
+| [ ] | `778` | <a href="https://leetcode.com/problems/swim-in-rising-water/" target="_blank" rel="noopener noreferrer"><b>Swim in Rising Water</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Matrix` `Heap (Priority Queue)` `Shortest Path` | Grid Dijkstra / Modified Kruskal finding bottleneck elevation |
+| [ ] | `1976` | <a href="https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/" target="_blank" rel="noopener noreferrer"><b>Number of Ways to Arrive at Destination</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Dynamic Programming` `Graph` `Shortest Path` | Dijkstra + Counting DP: accumulate ways when $d + w == dist[v]$ |
+
+</details>
+
+<a id="ga-p9"></a>
+<details open>
+<summary><b>Phase 9 · Floyd-Warshall Algorithm</b> &nbsp;<sub>(2 problems · 🟡 2 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `1462` | <a href="https://leetcode.com/problems/course-schedule-iv/" target="_blank" rel="noopener noreferrer"><b>Course Schedule IV</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Graph` `Topological Sort` `Floyd-Warshall` | Transitive closure reachability: $reach[i][j] |= reach[i][k] \& reach[k][j]$ |
+| [ ] | `1334` | <a href="https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/" target="_blank" rel="noopener noreferrer"><b>Find the City With Smallest Neighbors...</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Dynamic Programming` `Graph` `Shortest Path` | All-pairs shortest path table query with distance threshold |
+
+</details>
+
+<a id="ga-p10"></a>
+<details open>
+<summary><b>Phase 10 · Minimum Spanning Tree (MST)</b> &nbsp;<sub>(5 problems · 🟡 4 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `684` | <a href="https://leetcode.com/problems/redundant-connection/" target="_blank" rel="noopener noreferrer"><b>Redundant Connection</b></a> | 🟡 Medium | — | `DFS` `Union Find` `Graph` | 🔁 Spaced Repetition (Kruskal cycle detection) |
+| [ ] | `1319` | <a href="https://leetcode.com/problems/number-of-operations-to-make-network-connected/" target="_blank" rel="noopener noreferrer"><b>Number of Operations to Make Connected</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `DFS` `BFS` `Union Find` `Graph` | MST edge count requirement: need $ge n-1$ total cables |
+| [ ] | `1579` | <a href="https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/" target="_blank" rel="noopener noreferrer"><b>Remove Max Edges to Keep Traversable</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Union Find` `Graph` | Dual Kruskal MST: prioritize shared Type 3 edges first |
+| [ ] | `1584` | <a href="https://leetcode.com/problems/min-cost-to-connect-all-points/" target="_blank" rel="noopener noreferrer"><b>Min Cost to Connect All Points (Kruskal)</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `Union Find` `Minimum Spanning Tree` | Complete graph Manhattan MST using edge sorting + DSU |
+| [ ] | `1584` | <a href="https://leetcode.com/problems/min-cost-to-connect-all-points/" target="_blank" rel="noopener noreferrer"><b>Min Cost to Connect All Points (Prim's)</b></a> | 🟡 Medium | — | `Array` `Heap` `Minimum Spanning Tree` | 🔁 Spaced Repetition (Dense graph Prim's algorithm in $O(V^2)$) |
+
+</details>
+
+<a id="ga-p11"></a>
+<details open>
+<summary><b>Phase 11 · Lowest Common Ancestor / Binary Lifting</b> &nbsp;<sub>(1 problem · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `1483` | <a href="https://leetcode.com/problems/kth-ancestor-of-a-tree-node/" target="_blank" rel="noopener noreferrer"><b>Kth Ancestor of a Tree Node</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Binary Search` `Dynamic Programming` `Tree` `Design` | Binary lifting table $up[u][i] = up[up[u][i-1]][i-1]$ for $O(\log K)$ jumps |
+
+</details>
+
 
 ---
 
@@ -701,11 +873,187 @@ def max_concurrent_events(intervals: list[list[int]]) -> int:
 
 </details>
 
+<a id="dynamic-programming"></a>
+
+## 🟣 Dynamic Programming
+
+`41 problems` · 🟢 2 Easy · 🟡 25 Medium · 🔴 14 Hard · 39 Unique
+
+<div align="center">
+
+**Quick Jump to Phase:**  
+[1. 1D Decision DP](#dp-p1) • [2. Kadane / Subarray](#dp-p2) • [3. Knapsack / Subset Sum](#dp-p3) • [4. Grid DP](#dp-p4) • [5. LIS Family](#dp-p5) • [6. LCS Family](#dp-p6)  
+[7. State Machine / Stocks](#dp-p7) • [8. Counting DP](#dp-p8) • [9. Interval DP](#dp-p9) • [10. Tree DP](#dp-p10) • [11. Bitmask DP](#dp-p11) • [12. DAG / Graph DP](#dp-p12)  
+
+</div>
+
+<a id="dp-p1"></a>
+<details open>
+<summary><b>Phase 1 · 1D Decision DP (Take / Skip)</b> &nbsp;<sub>(4 problems · 🟢 1 Easy · 🟡 3 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `70` | <a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" rel="noopener noreferrer"><b>Climbing Stairs</b></a> | 🟢 Easy | ⭐ Core | `Dynamic Programming` `Math` | Canonical Fibonacci recurrence: $dp[i] = dp[i-1] + dp[i-2]$ |
+| [ ] | `198` | <a href="https://leetcode.com/problems/house-robber/" target="_blank" rel="noopener noreferrer"><b>House Robber</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` | Canonical Take/Skip decision: $max(dp[i-1], nums[i] + dp[i-2])$ |
+| [ ] | `740` | <a href="https://leetcode.com/problems/delete-and-earn/" target="_blank" rel="noopener noreferrer"><b>Delete and Earn</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `Array` `Dynamic Programming` `Hash Table` | Pre-aggregate buckets to reduce directly to House Robber |
+| [ ] | `213` | <a href="https://leetcode.com/problems/house-robber-ii/" target="_blank" rel="noopener noreferrer"><b>House Robber II</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` | Circular array trick: $max(rob(0..n-2), rob(1..n-1))$ |
+
+</details>
+
+<a id="dp-p2"></a>
+<details open>
+<summary><b>Phase 2 · Kadane / Subarray DP</b> &nbsp;<sub>(2 problems · 🟡 2 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `53` | <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener noreferrer"><b>Maximum Subarray</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` `Divide and Conquer` | Kadane's algorithm: $dp[i] = max(nums[i], dp[i-1] + nums[i])$ |
+| [ ] | `152` | <a href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" rel="noopener noreferrer"><b>Maximum Product Subarray</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` | Dual state tracking: maintaining both $max\_prod$ and $min\_prod$ for negative flips |
+
+</details>
+
+<a id="dp-p3"></a>
+<details open>
+<summary><b>Phase 3 · Knapsack / Subset Sum</b> &nbsp;<sub>(4 problems · 🟡 4 Med)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `416` | <a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener noreferrer"><b>Partition Equal Subset Sum</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` | 0/1 Knapsack boolean subset sum; reverse inner loop $target \to num$ |
+| [ ] | `494` | <a href="https://leetcode.com/problems/target-sum/" target="_blank" rel="noopener noreferrer"><b>Target Sum</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` `Backtracking` | Transform to subset sum: $P = (sum + target) // 2$ |
+| [ ] | `322` | <a href="https://leetcode.com/problems/coin-change/" target="_blank" rel="noopener noreferrer"><b>Coin Change</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` `Breadth-First Search` | Unbounded knapsack minimization: $dp[a] = min(dp[a], dp[a - c] + 1)$ |
+| [ ] | `518` | <a href="https://leetcode.com/problems/coin-change-ii/" target="_blank" rel="noopener noreferrer"><b>Coin Change II</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` | Unbounded knapsack counting combinations: loop coins outer, amount inner |
+
+</details>
+
+<a id="dp-p4"></a>
+<details open>
+<summary><b>Phase 4 · Grid DP</b> &nbsp;<sub>(6 problems · 🟡 5 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `62` | <a href="https://leetcode.com/problems/unique-paths/" target="_blank" rel="noopener noreferrer"><b>Unique Paths</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Math` `Dynamic Programming` `Combinatorics` | Canonical 2D grid path count: $dp[r][c] = dp[r-1][c] + dp[r][c-1]$ |
+| [ ] | `63` | <a href="https://leetcode.com/problems/unique-paths-ii/" target="_blank" rel="noopener noreferrer"><b>Unique Paths II</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `Array` `Dynamic Programming` `Matrix` | Grid DP with obstacle zeros: $dp[r][c] = 0$ if obstacle |
+| [ ] | `64` | <a href="https://leetcode.com/problems/minimum-path-sum/" target="_blank" rel="noopener noreferrer"><b>Minimum Path Sum</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` `Matrix` | Cost accumulation: $grid[r][c] + min(dp[r-1][c], dp[r][c-1])$ |
+| [ ] | `120` | <a href="https://leetcode.com/problems/triangle/" target="_blank" rel="noopener noreferrer"><b>Triangle</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `Array` `Dynamic Programming` | Bottom-up row reduction with in-place $O(N)$ space |
+| [ ] | `931` | <a href="https://leetcode.com/problems/minimum-falling-path-sum/" target="_blank" rel="noopener noreferrer"><b>Minimum Falling Path Sum</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `Array` `Dynamic Programming` `Matrix` | 3-way choice from previous row: $(c-1, c, c+1)$ |
+| [ ] | `174` | <a href="https://leetcode.com/problems/dungeon-game/" target="_blank" rel="noopener noreferrer"><b>Dungeon Game</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` `Matrix` | Backward bottom-right to top-left survival DP |
+
+</details>
+
+<a id="dp-p5"></a>
+<details open>
+<summary><b>Phase 5 · LIS / Increasing Subsequence</b> &nbsp;<sub>(3 problems · 🟡 2 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `300` | <a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener noreferrer"><b>Longest Increasing Subsequence</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `Array` `Binary Search` `Dynamic Programming` | $O(N^2)$ DP baseline & $O(N \log N)$ patience sort binary search |
+| [ ] | `673` | <a href="https://leetcode.com/problems/number-of-longest-increasing-subsequence/" target="_blank" rel="noopener noreferrer"><b>Number of Longest Increasing Subsequence</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `Array` `Dynamic Programming` `Segment Tree` | Dual array DP: tracking both length and count of LIS ending at $i$ |
+| [ ] | `354` | <a href="https://leetcode.com/problems/russian-doll-envelopes/" target="_blank" rel="noopener noreferrer"><b>Russian Doll Envelopes</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Array` `Binary Search` `Dynamic Programming` `Sorting` | 2D LIS: sort width asc, height desc to reduce to 1D LIS on height |
+
+</details>
+
+<a id="dp-p6"></a>
+<details open>
+<summary><b>Phase 6 · String / 2D DP — LCS Family</b> &nbsp;<sub>(5 problems · 🟡 3 Med · 🔴 2 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `1143` | <a href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank" rel="noopener noreferrer"><b>Longest Common Subsequence</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `String` `Dynamic Programming` | Canonical 2-string matrix match vs mismatch transition |
+| [ ] | `516` | <a href="https://leetcode.com/problems/longest-palindromic-subsequence/" target="_blank" rel="noopener noreferrer"><b>Longest Palindromic Subsequence</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `String` `Dynamic Programming` | Reduction trick: $LPS(s) = LCS(s, reverse(s))$ |
+| [ ] | `72` | <a href="https://leetcode.com/problems/edit-distance/" target="_blank" rel="noopener noreferrer"><b>Edit Distance</b></a> | 🟡 Medium | ⭐⭐⭐⭐⭐ Critical | `String` `Dynamic Programming` | Levenshtein distance: insert, delete, replace $3$-way decision |
+| [ ] | `115` | <a href="https://leetcode.com/problems/distinct-subsequences/" target="_blank" rel="noopener noreferrer"><b>Distinct Subsequences</b></a> | 🔴 Hard | ⭐⭐⭐⭐ Essential | `String` `Dynamic Programming` | Counting string alignments: $dp[i-1][j-1] + dp[i-1][j]$ on match |
+| [ ] | `1092` | <a href="https://leetcode.com/problems/shortest-common-supersequence/" target="_blank" rel="noopener noreferrer"><b>Shortest Common Supersequence</b></a> | 🔴 Hard | ⭐⭐⭐⭐ Essential | `String` `Dynamic Programming` | LCS table construction + backtracking path reconstruction |
+
+</details>
+
+<a id="dp-p7"></a>
+<details open>
+<summary><b>Phase 7 · State Machine DP — Stocks</b> &nbsp;<sub>(4 problems · 🟢 1 Easy · 🟡 2 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `121` | <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener noreferrer"><b>Best Time to Buy and Sell Stock</b></a> | 🟢 Easy | ⭐ Core | `Array` `Dynamic Programming` | Single-pass running minimum profit tracking |
+| [ ] | `309` | <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener noreferrer"><b>Best Time to Buy and Sell Stock with Cooldown</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` | 3-state finite state machine: $hold$, $sold$, and $rest$ |
+| [ ] | `714` | <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/" target="_blank" rel="noopener noreferrer"><b>Best Time to Buy and Sell Stock with Transaction Fee</b></a> | 🟡 Medium | ⭐⭐⭐ Important | `Array` `Dynamic Programming` `Greedy` | 2-state finite state machine: $hold$ vs $free$ with fee deduction |
+| [ ] | `188` | <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener noreferrer"><b>Best Time to Buy and Sell Stock IV</b></a> | 🔴 Hard | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` | $K$-transaction state machine with buy/sell arrays |
+
+</details>
+
+<a id="dp-p8"></a>
+<details open>
+<summary><b>Phase 8 · Counting DP</b> &nbsp;<sub>(3 problems · 🟡 2 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `91` | <a href="https://leetcode.com/problems/decode-ways/" target="_blank" rel="noopener noreferrer"><b>Decode Ways</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `String` `Dynamic Programming` | 1D counting DP with single-digit and valid two-digit branches |
+| [ ] | `518` | <a href="https://leetcode.com/problems/coin-change-ii/" target="_blank" rel="noopener noreferrer"><b>Coin Change II</b></a> | 🟡 Medium | — | `Array` `Dynamic Programming` | 🔁 Spaced Repetition (from Knapsack) |
+| [ ] | `115` | <a href="https://leetcode.com/problems/distinct-subsequences/" target="_blank" rel="noopener noreferrer"><b>Distinct Subsequences</b></a> | 🔴 Hard | — | `String` `Dynamic Programming` | 🔁 Spaced Repetition (from LCS Family) |
+
+</details>
+
+<a id="dp-p9"></a>
+<details open>
+<summary><b>Phase 9 · Interval DP</b> &nbsp;<sub>(3 problems · 🔴 3 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `312` | <a href="https://leetcode.com/problems/burst-balloons/" target="_blank" rel="noopener noreferrer"><b>Burst Balloons</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` | Reverse thinking: choose the LAST balloon $k$ to burst in $(i, j)$ |
+| [ ] | `1000` | <a href="https://leetcode.com/problems/minimum-cost-to-merge-stones/" target="_blank" rel="noopener noreferrer"><b>Minimum Cost to Merge Stones</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Array` `Dynamic Programming` | 3D state $dp[i][j][m]$ with step size $K-1$ partition splits |
+| [ ] | `132` | <a href="https://leetcode.com/problems/palindrome-partitioning-ii/" target="_blank" rel="noopener noreferrer"><b>Palindrome Partitioning II</b></a> | 🔴 Hard | ⭐⭐⭐⭐ Essential | `String` `Dynamic Programming` | Precomputed palindrome table + 1D min cut optimization |
+
+</details>
+
+<a id="dp-p10"></a>
+<details open>
+<summary><b>Phase 10 · Tree DP</b> &nbsp;<sub>(3 problems · 🟡 1 Med · 🔴 2 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `337` | <a href="https://leetcode.com/problems/house-robber-iii/" target="_blank" rel="noopener noreferrer"><b>House Robber III</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Dynamic Programming` `Tree` `Depth-First Search` | Post-order traversal returning $(rob, not\_rob)$ tuple per subtree |
+| [ ] | `124` | <a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="noopener noreferrer"><b>Binary Tree Maximum Path Sum</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Dynamic Programming` `Tree` `Depth-First Search` | Global bridge sum $val + left + right$ vs branch return $val + max(left, right)$ |
+| [ ] | `968` | <a href="https://leetcode.com/problems/binary-tree-cameras/" target="_blank" rel="noopener noreferrer"><b>Binary Tree Cameras</b></a> | 🔴 Hard | ⭐⭐⭐⭐ Essential | `Dynamic Programming` `Tree` `Depth-First Search` `Greedy` | Post-order 3-state bottom-up greedy coverage: ${0: uncovered, 1: camera, 2: covered}$ |
+
+</details>
+
+<a id="dp-p11"></a>
+<details open>
+<summary><b>Phase 11 · Bitmask / State Compression</b> &nbsp;<sub>(2 problems · 🟡 1 Med · 🔴 1 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `847` | <a href="https://leetcode.com/problems/shortest-path-visiting-all-nodes/" target="_blank" rel="noopener noreferrer"><b>Shortest Path Visiting All Nodes</b></a> | 🔴 Hard | ⭐⭐⭐⭐⭐ Critical | `Dynamic Programming` `Bit Manipulation` `Breadth-First Search` `Graph` | BFS with state tuple $(u, mask)$ visiting all $N$ nodes |
+| [ ] | `698` | <a href="https://leetcode.com/problems/partition-to-k-equal-sum-subsets/" target="_blank" rel="noopener noreferrer"><b>Partition to K Equal Sum Subsets</b></a> | 🟡 Medium | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` `Backtracking` `Bitmask` | Bitmask DP tracking remainder sum $dp[mask]$ to fill $k$ buckets |
+
+</details>
+
+<a id="dp-p12"></a>
+<details open>
+<summary><b>Phase 12 · DAG / Graph DP</b> &nbsp;<sub>(2 problems · 🔴 2 Hard)</sub></summary>
+<br>
+
+| Status | # | Problem | Difficulty | Priority | Topic Tags | Notes |
+|:---:|:---:|:---|:---:|:---:|:---|:---|
+| [ ] | `329` | <a href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener noreferrer"><b>Longest Increasing Path in a Matrix</b></a> | 🔴 Hard | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` `Depth-First Search` `Graph` `Topological Sort` `Memoization` | Implicit DAG in grid: DFS with memoization for strictly increasing paths |
+| [ ] | `2050` | <a href="https://leetcode.com/problems/parallel-courses-iii/" target="_blank" rel="noopener noreferrer"><b>Parallel Courses III</b></a> | 🔴 Hard | ⭐⭐⭐⭐ Essential | `Array` `Dynamic Programming` `Graph` `Topological Sort` | Kahn's algorithm with DP: $dp[v] = max(dp[v], dp[u] + time[v])$ |
+
+</details>
+
+
 ---
 
 <div align="center">
 
-<b>133 Practice Entries · 110 Unique LeetCode Problems · 3 Fundamental Patterns</b><br>
+<b>217 Practice Entries · 184 Unique LeetCode Problems · 5 Fundamental Patterns</b><br>
 Built for structured, disciplined, and repeatable DSA interview mastery.
 
 <br><br>
