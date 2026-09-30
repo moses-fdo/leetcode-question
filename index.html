@@ -1378,6 +1378,68 @@ tr.solved .problem-link {
   justify-content: flex-end;
   gap: 10px;
 }
+
+/* Quick Actions on Problem Row */
+.star-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s var(--ease-spring);
+}
+.star-btn:hover {
+  color: #F59E0B;
+  transform: scale(1.15);
+}
+.star-btn.starred {
+  color: #F59E0B;
+}
+.star-btn.starred svg {
+  fill: #F59E0B;
+}
+
+.copy-link-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.18s var(--ease-spring);
+}
+.problem-row:hover .copy-link-btn {
+  opacity: 1;
+}
+.copy-link-btn:hover {
+  color: var(--accent);
+  background: var(--surface-hover);
+  transform: scale(1.1);
+}
+
+.tag-badge {
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tag-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface-hover);
+}
+
+/* Sound button */
+.sound-btn.muted {
+  opacity: 0.6;
+}
+
 </style>
 </head>
 <body>
@@ -1465,6 +1527,8 @@ tr.solved .problem-link {
     <!-- Footer actions -->
     <div class="sidebar-footer">
       <div class="footer-actions">
+        <button class="tool-btn" id="soundBtn" title="Toggle audio chime">🔊</button>
+        <button class="tool-btn" id="shortcutsBtn" title="Keyboard shortcuts (?)">⌨️</button>
         <button class="tool-btn" id="exportBtn" title="Export progress as JSON">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Export
@@ -1698,6 +1762,7 @@ tr.solved .problem-link {
               <div class="week-title">Two Pointers Foundations</div>
               <div class="week-target">Target: Two Pointers Phases 1–3 (21 problems)</div>
               <div class="week-goal">Goal: Master opposite pointers, cycle detection, and in-place manipulation cold.</div>
+              <button class="action-btn week-jump-btn" data-target="two-pointers" style="margin-top:10px;font-size:11px;padding:4px 10px;">View Week 1 Problems ↗</button>
             </div>
           </div>
           <div class="schedule-card">
@@ -1706,6 +1771,7 @@ tr.solved .problem-link {
               <div class="week-title">Sliding Window Mechanics</div>
               <div class="week-target">Target: Two Pointers Phases 4–7 (23 problems)</div>
               <div class="week-goal">Goal: Master fixed and variable windows, frequency maps, and the "At Most K" reduction trick.</div>
+              <button class="action-btn week-jump-btn" data-target="phase-two-pointers-3" style="margin-top:10px;font-size:11px;padding:4px 10px;">View Week 2 Problems ↗</button>
             </div>
           </div>
           <div class="schedule-card">
@@ -1714,6 +1780,7 @@ tr.solved .problem-link {
               <div class="week-title">Monotonic Deques & Prefix Basics</div>
               <div class="week-target">Target: Two Pointers Phases 8–9 + Prefix Sum Phases 1–4 (29 problems)</div>
               <div class="week-goal">Goal: Conquer Sliding Window Maximum and master prefix sum with hashmap lookups.</div>
+              <button class="action-btn week-jump-btn" data-target="prefix-sum" style="margin-top:10px;font-size:11px;padding:4px 10px;">View Week 3 Problems ↗</button>
             </div>
           </div>
           <div class="schedule-card">
@@ -1722,6 +1789,7 @@ tr.solved .problem-link {
               <div class="week-title">Prefix Sum Deep Dive</div>
               <div class="week-target">Target: Prefix Sum Phases 5–11 (26 problems)</div>
               <div class="week-goal">Goal: Master 2D prefix sums, difference arrays, and binary search range boundaries.</div>
+              <button class="action-btn week-jump-btn" data-target="phase-prefix-sum-4" style="margin-top:10px;font-size:11px;padding:4px 10px;">View Week 4 Problems ↗</button>
             </div>
           </div>
           <div class="schedule-card">
@@ -1730,6 +1798,7 @@ tr.solved .problem-link {
               <div class="week-title">Interval Foundations & Greedy</div>
               <div class="week-target">Target: Merge Intervals Phases 1–5 (18 problems)</div>
               <div class="week-goal">Goal: Master interval sorting, overlap conditions, and sweep line algorithms.</div>
+              <button class="action-btn week-jump-btn" data-target="merge-intervals" style="margin-top:10px;font-size:11px;padding:4px 10px;">View Week 5 Problems ↗</button>
             </div>
           </div>
           <div class="schedule-card">
@@ -1738,6 +1807,7 @@ tr.solved .problem-link {
               <div class="week-title">Interval Heaps, Coverage & Capstones</div>
               <div class="week-target">Target: Merge Intervals Phases 6–8 + Re-solve ⭐⭐⭐⭐⭐ (11+ problems)</div>
               <div class="week-goal">Goal: Master heap-based scheduling and write all 10 critical capstones from scratch.</div>
+              <button class="action-btn week-jump-btn" data-target="phase-merge-intervals-5" style="margin-top:10px;font-size:11px;padding:4px 10px;">View Week 6 Problems ↗</button>
             </div>
           </div>
         </div>
@@ -1758,6 +1828,47 @@ tr.solved .problem-link {
   </div>
 </div>
 
+<!-- Keyboard Shortcuts Modal -->
+<div class="modal-overlay" id="shortcutsModal">
+  <div class="modal-box" style="max-width: 480px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+      <h3 class="modal-title" style="margin-bottom:0;">⌨️ Keyboard Shortcuts</h3>
+      <button class="action-btn" id="shortcutsCloseBtn" style="padding:3px 8px;">✕</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px;font-size:12.5px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Search</span> <kbd class="search-kbd" style="position:static;transform:none;">/</kbd>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Clear / Close</span> <kbd class="search-kbd" style="position:static;transform:none;">Esc</kbd>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Toggle Theme</span> <kbd class="search-kbd" style="position:static;transform:none;">t</kbd>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Toggle Sound</span> <kbd class="search-kbd" style="position:static;transform:none;">m</kbd>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Expand All</span> <kbd class="search-kbd" style="position:static;transform:none;">e</kbd>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Collapse All</span> <kbd class="search-kbd" style="position:static;transform:none;">c</kbd>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Tabs 1–5</span> <kbd class="search-kbd" style="position:static;transform:none;">1–5</kbd>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-card);padding:7px 11px;border-radius:8px;border:1px solid var(--border);">
+        <span>Help (?)</span> <kbd class="search-kbd" style="position:static;transform:none;">?</kbd>
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <button class="action-btn" id="shortcutsGotItBtn">Got It</button>
+    </div>
+  </div>
+</div>
+
+<canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;"></canvas>
+
 <!-- Toast notification -->
 <div class="toast" id="toastMessage"></div>
 
@@ -1772,6 +1883,150 @@ tr.solved .problem-link {
   const DATA = JSON.parse(document.getElementById('lc-data').textContent);
   const STORE_KEY = 'lc_tracker_solved_v1';
   const THEME_KEY = 'lc_tracker_theme_v1';
+  const STAR_KEY = 'lc_tracker_starred_v1';
+  const SOUND_KEY = 'lc_tracker_sound_v1';
+
+  // User Starred / Bookmarks
+  let userStarred = new Set();
+  try {
+    const rawStar = localStorage.getItem(STAR_KEY);
+    if (rawStar) userStarred = new Set(JSON.parse(rawStar));
+  } catch (e) {}
+
+  function persistStars() {
+    try {
+      localStorage.setItem(STAR_KEY, JSON.stringify([...userStarred]));
+    } catch (e) {}
+  }
+
+  function toggleStar(num) {
+    if (userStarred.has(num)) {
+      userStarred.delete(num);
+      showToast(`Removed #${num} from bookmarks`);
+    } else {
+      userStarred.add(num);
+      showToast(`⭐ Bookmarked #${num} for revision`);
+    }
+    persistStars();
+    document.querySelectorAll(`.star-btn[data-star-num="${num}"]`).forEach(btn => {
+      const active = userStarred.has(num);
+      btn.classList.toggle('starred', active);
+      const svg = btn.querySelector('svg');
+      if (svg) svg.setAttribute('fill', active ? '#F59E0B' : 'none');
+      btn.title = active ? 'Remove from bookmarks' : 'Bookmark for revision';
+    });
+    document.querySelectorAll(`.problem-row[data-num="${num}"]`).forEach(row => {
+      const prob = allProblemsMap.get(num);
+      const isStarred = userStarred.has(num) || (prob && prob.st > 0);
+      row.dataset.starred = isStarred ? '1' : '0';
+    });
+    if (activeStatus === 'starred') applyFilters();
+  }
+
+  // Audio Chime Feedback
+  let audioCtx = null;
+  let soundEnabled = localStorage.getItem(SOUND_KEY) !== 'false';
+
+  function playTone(success = true) {
+    if (!soundEnabled) return;
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const now = audioCtx.currentTime;
+      if (success) {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.12); // G5
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.start(now);
+        osc.stop(now + 0.18);
+      } else {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(330, now + 0.12);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      }
+    } catch (e) {}
+  }
+
+  // Celebration Canvas Confetti
+  const confettiCanvas = document.getElementById('confettiCanvas');
+  const confettiCtx = confettiCanvas ? confettiCanvas.getContext('2d') : null;
+  let confettiParticles = [];
+  let confettiAnimId = null;
+
+  function resizeConfetti() {
+    if (!confettiCanvas) return;
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeConfetti);
+  resizeConfetti();
+
+  function fireConfetti() {
+    if (!confettiCanvas || !confettiCtx) return;
+    const colors = ['#38BDF8', '#10B981', '#F59E0B', '#EC4899', '#8B5CF6', '#F43F5E'];
+    confettiParticles = [];
+    for (let i = 0; i < 70; i++) {
+      confettiParticles.push({
+        x: window.innerWidth * (0.25 + Math.random() * 0.5),
+        y: window.innerHeight * 0.35,
+        vx: (Math.random() - 0.5) * 14,
+        vy: -Math.random() * 12 - 4,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rSpeed: (Math.random() - 0.5) * 12,
+        opacity: 1
+      });
+    }
+    if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
+    animateConfetti();
+  }
+
+  function animateConfetti() {
+    if (!confettiCtx) return;
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    let alive = 0;
+    confettiParticles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.35;
+      p.rotation += p.rSpeed;
+      p.opacity -= 0.009;
+
+      if (p.opacity > 0 && p.y < confettiCanvas.height) {
+        alive++;
+        confettiCtx.save();
+        confettiCtx.translate(p.x, p.y);
+        confettiCtx.rotate((p.rotation * Math.PI) / 180);
+        confettiCtx.globalAlpha = Math.max(0, p.opacity);
+        confettiCtx.fillStyle = p.color;
+        confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+        confettiCtx.restore();
+      }
+    });
+
+    if (alive > 0) {
+      confettiAnimId = requestAnimationFrame(animateConfetti);
+    } else {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiAnimId = null;
+    }
+  }
 
   // Default preloaded progress from user LeetCode practice history (133 questions)
   const DEFAULT_SOLVED = [
@@ -1990,11 +2245,12 @@ tr.solved .problem-link {
           const repeatHtml = r.r ? `<span class="repeat-badge" title="Spaced repetition: reappears from earlier phase"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg> Repeat</span>` : '';
           const tagsHtml = (r.tg || []).map(t => `<span class="tag-badge">${t}</span>`).join('');
 
+          const isStarred = userStarred.has(r.n);
           return `
             <div class="problem-row ${isDone ? 'solved' : ''}"
                  data-num="${r.n}"
                  data-diff="${r.d}"
-                 data-starred="${r.st > 0 ? '1' : '0'}"
+                 data-starred="${(r.st > 0 || isStarred) ? '1' : '0'}"
                  data-title="${r.t.toLowerCase()}"
                  data-tags="${(r.tg || []).join(' ').toLowerCase()}">
               <input type="checkbox" class="problem-cb" data-num="${r.n}" ${isDone ? 'checked' : ''} aria-label="Mark ${r.t} as solved">
@@ -2002,6 +2258,12 @@ tr.solved .problem-link {
               <span class="problem-num">#${r.n}</span>
               <div class="problem-info">
                 <a href="https://leetcode.com/problems/${r.s}/" target="_blank" rel="noopener noreferrer" class="problem-link">${r.t}</a>
+                <button class="copy-link-btn" data-copy-num="${r.n}" data-copy-title="${escapeHtml(r.t)}" data-copy-slug="${r.s}" title="Copy Markdown link" aria-label="Copy markdown link for ${r.t}">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </button>
+                <button class="star-btn ${isStarred ? 'starred' : ''}" data-star-num="${r.n}" title="${isStarred ? 'Remove from bookmarks' : 'Bookmark for revision'}" aria-label="Bookmark problem #${r.n}">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="${isStarred ? '#F59E0B' : 'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </button>
                 <div class="problem-tags">${tagsHtml}</div>
                 ${starsHtml}
                 ${repeatHtml}
@@ -2046,18 +2308,58 @@ tr.solved .problem-link {
         toggleProblemSolved(num, e.target.checked);
       }
     });
+
+    // Tag click filtering, Star toggle, and Markdown copy
+    curriculumContainer.addEventListener('click', (e) => {
+      const tagEl = e.target.closest('.tag-badge');
+      if (tagEl && !tagEl.closest('.problem-stars, .repeat-badge')) {
+        const tagText = tagEl.textContent.trim();
+        searchInput.value = tagText;
+        searchTerm = tagText;
+        if (activeTab !== 'roadmap') switchTab('roadmap');
+        applyFilters();
+        showToast(`Filtered by tag: "${tagText}"`);
+        return;
+      }
+      const starBtn = e.target.closest('.star-btn');
+      if (starBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const num = parseInt(starBtn.dataset.starNum, 10);
+        toggleStar(num);
+        return;
+      }
+      const copyBtn = e.target.closest('.copy-link-btn');
+      if (copyBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const num = copyBtn.dataset.copyNum;
+        const title = copyBtn.dataset.copyTitle;
+        const slug = copyBtn.dataset.copySlug;
+        const md = `[#${num} ${title}](https://leetcode.com/problems/${slug}/)`;
+        copyToClipboard(md).then(() => {
+          showToast(`Copied Markdown link for #${num}`);
+        });
+        return;
+      }
+    });
   }
+
+  // Track previously completed phases to trigger celebration once
+  const completedPhases = new Set();
 
   // Toggle problem solved
   function toggleProblemSolved(num, isSolved) {
     if (isSolved) {
       solved.add(num);
+      playTone(true);
     } else {
       solved.delete(num);
+      playTone(false);
     }
     persist();
     syncCheckboxes(num);
-    updateAllStats();
+    updateAllStats(isSolved);
     applyFilters();
   }
 
@@ -2072,7 +2374,7 @@ tr.solved .problem-link {
   }
 
   // Calculate & Refresh all metrics
-  function updateAllStats() {
+  function updateAllStats(checkCelebration = false) {
     let doneUnique = 0;
     let easySolved = 0, medSolved = 0, hardSolved = 0;
 
@@ -2129,6 +2431,17 @@ tr.solved .problem-link {
 
         const countBadge = phaseCard.querySelector('[data-phase-count]');
         if (countBadge) countBadge.textContent = `${phaseSolved}/${phase.rows.length}`;
+
+        // Confetti celebration on newly completed phase
+        if (checkCelebration && phaseSolved === phase.rows.length && phase.rows.length > 0) {
+          if (!completedPhases.has(phaseId)) {
+            completedPhases.add(phaseId);
+            fireConfetti();
+            showToast(`🎉 ${phase.title} (Phase ${pIdx + 1}) 100% Completed!`);
+          }
+        } else if (phaseSolved < phase.rows.length) {
+          completedPhases.delete(phaseId);
+        }
 
         const fillMini = phaseCard.querySelector('[data-phase-fill]');
         if (fillMini) {
@@ -2208,19 +2521,94 @@ tr.solved .problem-link {
     applyFilters();
   });
 
+  const shortcutsModal = document.getElementById('shortcutsModal');
+  const shortcutsBtn = document.getElementById('shortcutsBtn');
+  const shortcutsCloseBtn = document.getElementById('shortcutsCloseBtn');
+  const shortcutsGotItBtn = document.getElementById('shortcutsGotItBtn');
+  const soundBtn = document.getElementById('soundBtn');
+
+  function toggleShortcutsModal(open) {
+    if (shortcutsModal) shortcutsModal.classList.toggle('open', open);
+  }
+
+  if (shortcutsBtn) shortcutsBtn.addEventListener('click', () => toggleShortcutsModal(true));
+  if (shortcutsCloseBtn) shortcutsCloseBtn.addEventListener('click', () => toggleShortcutsModal(false));
+  if (shortcutsGotItBtn) shortcutsGotItBtn.addEventListener('click', () => toggleShortcutsModal(false));
+
+  function updateSoundBtn() {
+    if (!soundBtn) return;
+    soundBtn.textContent = soundEnabled ? '🔊' : '🔇';
+    soundBtn.title = soundEnabled ? 'Audio feedback: On (press m to mute)' : 'Audio feedback: Muted (press m to enable)';
+  }
+  if (soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem(SOUND_KEY, String(soundEnabled));
+      updateSoundBtn();
+      showToast(soundEnabled ? 'Audio chime enabled' : 'Audio chime muted');
+      if (soundEnabled) playTone(true);
+    });
+    updateSoundBtn();
+  }
+
+  // Keyboard navigation & global shortcuts
   window.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== searchInput) {
+    const isInputActive = document.activeElement === searchInput || document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA';
+
+    if (e.key === '/' && !isInputActive) {
       e.preventDefault();
       searchInput.focus();
+      return;
+    }
+    if (e.key === 'f' && !isInputActive) {
+      e.preventDefault();
+      searchInput.focus();
+      return;
     }
     if (e.key === 'Escape') {
-      if (confirmModal.classList.contains('open')) {
+      if (confirmModal && confirmModal.classList.contains('open')) {
         confirmModal.classList.remove('open');
+      } else if (shortcutsModal && shortcutsModal.classList.contains('open')) {
+        shortcutsModal.classList.remove('open');
       } else if (searchInput === document.activeElement) {
         searchInput.value = '';
         searchTerm = '';
         searchInput.blur();
         applyFilters();
+      }
+      return;
+    }
+
+    if (!isInputActive) {
+      if (e.key === '?') {
+        e.preventDefault();
+        toggleShortcutsModal(true);
+      } else if (e.key === 't') {
+        e.preventDefault();
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      } else if (e.key === 'm') {
+        e.preventDefault();
+        soundEnabled = !soundEnabled;
+        localStorage.setItem(SOUND_KEY, String(soundEnabled));
+        updateSoundBtn();
+        showToast(soundEnabled ? 'Audio chime enabled' : 'Audio chime muted');
+      } else if (e.key === 'e') {
+        e.preventDefault();
+        document.getElementById('expandAllBtn').click();
+      } else if (e.key === 'c') {
+        e.preventDefault();
+        document.getElementById('collapseAllBtn').click();
+      } else if (e.key === '1') {
+        switchTab('roadmap');
+      } else if (e.key === '2') {
+        switchTab('mustdo');
+      } else if (e.key === '3') {
+        switchTab('cheatsheet');
+      } else if (e.key === '4') {
+        switchTab('templates');
+      } else if (e.key === '5') {
+        switchTab('schedule');
       }
     }
   });
@@ -2589,6 +2977,23 @@ tr.solved .problem-link {
     applyFilters();
     confirmModal.classList.remove('open');
     showToast('All progress has been reset.');
+  });
+
+  
+  // Week plan jump buttons
+  document.querySelectorAll('.week-jump-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const targetId = btn.dataset.target;
+      switchTab('roadmap');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.dataset.open = 'true';
+        const hBtn = targetEl.querySelector('.phase-header');
+        if (hBtn) hBtn.setAttribute('aria-expanded', 'true');
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showToast('Navigated to study plan target');
+      }
+    });
   });
 
   // Initialize
